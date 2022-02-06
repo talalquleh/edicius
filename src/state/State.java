@@ -1,10 +1,10 @@
-package game.state;
+package state;
 
 import entities.Entity;
 import game.Time;
 import gfx.SpriteSheet;
-import helper_classes.Position;
-import helper_classes.Size;
+import helpers.Position;
+import helpers.Size;
 import input.Input;
 import worlds.GameMap;
 

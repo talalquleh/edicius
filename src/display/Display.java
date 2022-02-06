@@ -3,7 +3,7 @@ package display;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
-import game.state.State;
+import state.State;
 import input.Input;
 
 public class Display extends JFrame {

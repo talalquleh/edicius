@@ -23,7 +23,6 @@ public class SpriteSheet {
     private void loadSpritesFromDisk() {
         loadUnits("/sprites/units");
         loadTiles("/sprites/tiles");
-
     }
 
     private void loadTiles(String path) {

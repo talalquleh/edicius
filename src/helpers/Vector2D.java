@@ -1,4 +1,4 @@
-package helper_classes;
+package helpers;
 
 public class Vector2D {
     private double x;

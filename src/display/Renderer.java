@@ -3,8 +3,8 @@ package display;
 import java.awt.Graphics;
 
 import game.Game;
-import game.state.State;
-import worlds.Tile;
+import state.State;
+import tiles.Tile;
 import gfx.Camera;
 
 public class Renderer {

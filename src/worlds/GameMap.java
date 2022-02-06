@@ -2,8 +2,9 @@ package worlds;
 
 import game.Game;
 import gfx.SpriteSheet;
-import helper_classes.Position;
-import helper_classes.Size;
+import helpers.Position;
+import helpers.Size;
+import tiles.Tile;
 
 import java.util.Arrays;
 

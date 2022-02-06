@@ -2,9 +2,9 @@ package game;
 
 
 import display.Display;
-import game.state.GameState;
-import game.state.State;
-import helper_classes.Size;
+import state.GameState;
+import state.State;
+import helpers.Size;
 import input.Input;
 
 public class Game {

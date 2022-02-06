@@ -1,4 +1,4 @@
-package helper_classes;
+package helpers;
 
 public enum Direction {
     S(0),

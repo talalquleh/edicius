@@ -1,9 +1,9 @@
-package game.state;
+package state;
 
 
 import controller.PlayerController;
 import entities.creatures.Player;
-import helper_classes.Size;
+import helpers.Size;
 import input.Input;
 import worlds.GameMap;
 

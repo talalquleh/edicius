@@ -1,4 +1,4 @@
-package helper_classes;
+package helpers;
 
 public class Position {
 

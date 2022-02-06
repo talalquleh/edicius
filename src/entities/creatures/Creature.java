@@ -2,9 +2,8 @@ package entities.creatures;
 
 import controller.Controller;
 import entities.Entity;
-import game.state.State;
-import gfx.SpriteSheet;
-import helper_classes.Motion;
+import state.State;
+import helpers.Motion;
 
 import java.awt.*;
 

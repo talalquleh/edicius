@@ -1,9 +1,9 @@
 package gfx;
 
 import entities.Entity;
-import game.state.State;
-import helper_classes.Position;
-import helper_classes.Size;
+import state.State;
+import helpers.Position;
+import helpers.Size;
 
 
 import java.util.Optional;

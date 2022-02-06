@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import game.Game;
-import helper_classes.Direction;
+import helpers.Direction;
 
 public class Animation {
 

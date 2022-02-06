@@ -1,9 +1,9 @@
 package entities;
 import java.awt.*;
 
-import game.state.State;
-import helper_classes.Position;
-import helper_classes.Size;
+import state.State;
+import helpers.Position;
+import helpers.Size;
 
 public abstract class Entity {
     protected Position position;

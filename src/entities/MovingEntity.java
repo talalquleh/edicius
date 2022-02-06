@@ -4,25 +4,24 @@ package entities;
 import java.awt.Image;
 
 import controller.Controller;
-import entities.Entity;
-import game.state.State;
+import state.State;
 import gfx.Animation;
 import gfx.SpriteSheet;
-import helper_classes.Direction;
-import helper_classes.Motion;
+import helpers.Direction;
+import helpers.Motion;
 
 public abstract class MovingEntity extends Entity {
 
     protected Controller controller;
     protected Motion motion;
-    protected Animation animationManager;
+    protected Animation animation;
     protected Direction direction;
 
     public MovingEntity(Controller controller , SpriteSheet spriteLibrary) {
         super();
         this.controller = controller;
         this.motion = new Motion(2);
-        this.animationManager = new Animation(spriteLibrary.getUnit("dave"));
+        this.animation = new Animation(spriteLibrary.getUnit("dave"));
         this.direction = Direction.S;
     }
     @Override
@@ -31,14 +30,14 @@ public abstract class MovingEntity extends Entity {
         position.apply(motion);
         manageDirection();
         decideAnimation();
-        animationManager.update(direction);
+        animation.update(direction);
     }
 
     private void decideAnimation() {
         if(motion.isMoving()){
-            animationManager.playAnimation("walk");
+            animation.playAnimation("walk");
         }else{
-            animationManager.playAnimation("stand");
+            animation.playAnimation("stand");
         }
     }
 
@@ -50,7 +49,7 @@ public abstract class MovingEntity extends Entity {
 
     @Override
     public Image getSprite() {
-        return animationManager.getSprite();
+        return animation.getSprite();
     }
 
     public Controller getController(){

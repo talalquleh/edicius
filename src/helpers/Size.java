@@ -1,4 +1,4 @@
-package helper_classes;
+package helpers;
 public class Size {
     private double width;
     private double height;
