@@ -2,6 +2,7 @@ package entities.creatures;
 
 import controller.Controller;
 import entities.Entity;
+import game.state.State;
 import gfx.SpriteSheet;
 import helper_classes.Motion;
 
@@ -18,7 +19,7 @@ public class Creature extends Entity {
     }
 
     @Override
-    public void update() {
+    public void update(State state) {
         motion.update(controller);
         position.apply(motion);
     }
