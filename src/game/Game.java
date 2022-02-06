@@ -1,35 +1,32 @@
 package game;
-import java.util.ArrayList;
-import java.util.List;
 
-import controller.PlayerController;
+
 import display.Display;
-import entities.creatures.Creature;
-import entities.creatures.Player;
+import state.GameState;
+import state.State;
+import helpers.Size;
 import input.Input;
 
 public class Game {
-    private Display display;
-    private List<Creature> creatures ;
-    private Input input;
 
+    public static final int SPRITE_SIZE = 64;
+
+    private Display display;
+    private Input input;
+    private State state;
 
     public Game(int width, int height){
-    	input = new Input();
+        input   = new Input();
         display = new Display(width, height, input);
-        creatures = new ArrayList<>();
-        creatures.add(new Player(new PlayerController(input)));
+        state   = new GameState(new Size(width, height), input);
     }
 
     public void update(){
-        creatures.forEach(gameObject -> gameObject.update());
-    }
-    public void render(){
-        display.render(this);
+        state.update();
     }
 
-    public List<Creature> getGameObjects(){
-        return creatures;
+    public void render(){
+        display.render(state);
     }
 
 }

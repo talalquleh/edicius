@@ -2,8 +2,8 @@ package entities.creatures;
 
 import controller.Controller;
 import entities.Entity;
-import gfx.SpriteSheet;
-import helper_classes.Motion;
+import state.State;
+import helpers.Motion;
 
 import java.awt.*;
 
@@ -18,7 +18,7 @@ public class Creature extends Entity {
     }
 
     @Override
-    public void update() {
+    public void update(State state) {
         motion.update(controller);
         position.apply(motion);
     }

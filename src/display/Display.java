@@ -3,22 +3,22 @@ package display;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
-import game.Game;
+import state.State;
 import input.Input;
 
 public class Display extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	
-	
+
+
 	private Canvas canvas;
 	private Renderer renderer;
-	
+
 	public Display(int width, int height , Input input) {
 		setTitle("Game");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
-	
+
 		renderer = new Renderer();
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(width, height));
@@ -33,7 +33,7 @@ public class Display extends JFrame {
 		setVisible(true);
 	}
 
-	public void render(Game game){
+	public void render(State state){
 		BufferStrategy bufferStartegy = canvas.getBufferStrategy();
 		Graphics graphics = bufferStartegy.getDrawGraphics();
 
@@ -41,11 +41,11 @@ public class Display extends JFrame {
 
 		graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-		renderer.render(game, graphics);
+		renderer.render(state, graphics);
 
 		graphics.dispose();
 		bufferStartegy.show();
-		
+
 	}
 
 }

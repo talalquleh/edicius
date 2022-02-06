@@ -1,8 +1,9 @@
 package entities;
 import java.awt.*;
 
-import helper_classes.Position;
-import helper_classes.Size;
+import state.State;
+import helpers.Position;
+import helpers.Size;
 
 public abstract class Entity {
     protected Position position;
@@ -13,7 +14,7 @@ public abstract class Entity {
         size = new Size(50, 50);
     }
 
-    public abstract void update();
+    public abstract void update(State state);
 
     public abstract Image getSprite();
 
@@ -23,6 +24,10 @@ public abstract class Entity {
 
     public Size getSize(){
         return this.size;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
 }
