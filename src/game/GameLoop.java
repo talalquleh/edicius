@@ -14,19 +14,20 @@ public class GameLoop implements Runnable{
         this.game = game;
     }
 
+
     @Override
     public void run() {
         running = true;
         double accumulator = 0;
-        long currenTime, lastUpdate = System.currentTimeMillis();
+        long currentTime, lastUpdate = System.currentTimeMillis();
 
         nextStatTime = System.currentTimeMillis() + 1000;
 
         while(running){
-            currenTime = System.currentTimeMillis();
-            double lastRenderTimeInSeconds = (currenTime - lastUpdate) / 1000d;
+            currentTime = System.currentTimeMillis();
+            double lastRenderTimeInSeconds = (currentTime - lastUpdate) / 1000d;
             accumulator += lastRenderTimeInSeconds;
-            lastUpdate = currenTime;
+            lastUpdate = currentTime;
 
             if(accumulator >= updateRate)
             {
@@ -48,12 +49,18 @@ public class GameLoop implements Runnable{
             nextStatTime = System.currentTimeMillis() + 1000; 
         }
     }
-    
+
+    /**
+     * Calling the update function on the game class.
+     */
     private void update() {
         game.update();
         ups++;
     }
-    
+
+    /**
+     * Calling the render function on the game class.
+     */
     private void render() {
         game.render();
         fps++;

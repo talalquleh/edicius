@@ -3,6 +3,9 @@ package controller;
 import java.awt.event.KeyEvent;
 import input.Input;
 
+/**
+ * A class implements the Controller and has methods to determine the pressed key on the keyboard!
+ */
 public class PlayerController implements 	Controller {
 	private Input input;
 	

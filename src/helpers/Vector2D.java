@@ -23,6 +23,9 @@ public class Vector2D {
         return Math.sqrt((x * x) +( y * y));
     }
 
+    /**
+     * To separates the direction from the magnitude!
+     */
     public void normlize() {
         double length = this.length();
         if(x == 0) {

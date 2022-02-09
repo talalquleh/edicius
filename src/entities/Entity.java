@@ -5,6 +5,9 @@ import state.State;
 import helpers.Position;
 import helpers.Size;
 
+/**
+ * A class to identify all the entities of the game.
+ */
 public abstract class Entity {
     protected Position position;
     protected Size size;
