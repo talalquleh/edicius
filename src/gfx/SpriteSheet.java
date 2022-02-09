@@ -25,6 +25,10 @@ public class SpriteSheet {
         loadTiles("/sprites/tiles");
     }
 
+    /**
+     * Loads the tiles of the game according the specified path!
+     * @param path
+     */
     private void loadTiles(String path) {
         String [] imagesInFolder = getImagesInFolder(path);
 
@@ -36,6 +40,10 @@ public class SpriteSheet {
         }
     }
 
+    /**
+     * Loading the entity units using the path specified.
+     * @param path
+     */
     private void loadUnits(String path){
         String[] folderNames = getFolderNames(path);
 
@@ -54,6 +62,11 @@ public class SpriteSheet {
         }
     }
 
+    /**
+     * Getting all the folder names listed on a specified directory (basePath) by using the java.net.URL
+     * @param basePath
+     * @return a list of folder names.
+     */
     private String[] getFolderNames(String basePath) {
         URL resource = SpriteSheet.class.getResource(basePath);
         File file ;
@@ -65,6 +78,11 @@ public class SpriteSheet {
         return file.list((current, name ) -> new File(current ,name).isDirectory());
     }
 
+    /**
+     * Getting all the file names listed on a specified directory (basePath) by using the java.net.URL
+     * @param basePath
+     * @return a list of file names.
+     */
     private String[] getImagesInFolder(String basePath) {
         URL resource = SpriteSheet.class.getResource(basePath);
         File file;

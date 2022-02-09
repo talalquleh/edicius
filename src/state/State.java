@@ -39,6 +39,10 @@ public class State {
         return camera;
     }
 
+    /**
+     * Updating all the game objects by calling their update methods.
+     * Updating the camera position!
+     */
     public void update(){
         sortObjectsByPosition();
         gameObjects.forEach(gameObject -> gameObject.update(this));

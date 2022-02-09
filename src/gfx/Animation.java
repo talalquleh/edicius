@@ -25,6 +25,10 @@ public class Animation {
         this.playAnimation("stand");
     }
 
+    /**
+     * Cutting the original player image into pieces according the size of the player! (NOTE: this method is exclusive for the player
+     * @return supImage
+     */
     public Image getSprite() {
         return this.currentAnimationSheet.getSubimage(
                 frameIndex * Game.SPRITE_SIZE,
@@ -32,6 +36,10 @@ public class Animation {
                 Game.SPRITE_SIZE, Game.SPRITE_SIZE);
     }
 
+    /**
+     * Updating the direction of the moving entity according the animation row which was declared on the Direction enum!
+     * @param direction
+     */
     public void update(Direction direction) {
         this.currentFrameTime++;
         directionIndex = direction.getAnimationRow();

@@ -11,6 +11,11 @@ import java.util.Arrays;
 public class GameMap {
 	private Tile[][] tiles;
 
+	/**
+	 * Initialize all the tails from the SpriteSheet provided!
+	 * @param size
+	 * @param spriteLibrary
+	 */
 	public GameMap(Size size, SpriteSheet spriteLibrary) {
 		tiles = new Tile[(int) size.getWidth()][(int) size.getHeight()];
 		initializeTiles(spriteLibrary);

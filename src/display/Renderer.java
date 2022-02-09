@@ -9,6 +9,11 @@ import gfx.Camera;
 
 public class Renderer {
 
+	/**
+	 * Getting the game objects from and drawing them into our frame
+	 * @param state
+	 * @param graphics
+	 */
 	public void render(State state, Graphics graphics) {
 		renderMap(state , graphics);
 		Camera camera = state.getCamera();
@@ -19,6 +24,11 @@ public class Renderer {
 				null));
 	}
 
+	/**
+	 * Rendering the game map using the tiles stored in the game state and positioning the camera to focus on the player!
+	 * @param state
+	 * @param graphics
+	 */
 	private void renderMap(State state, Graphics graphics) {
 		Tile[][] tiles = state.getGameMap().getTiles();
 		Camera camera = state.getCamera();

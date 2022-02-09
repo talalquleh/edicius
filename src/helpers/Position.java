@@ -29,6 +29,10 @@ public class Position {
         return y;
     }
 
+    /**
+     * Sets a motion for some vector position!
+     * @param motion
+     */
     public void apply(Motion motion) {
         Vector2D vector = motion.getVector();
         x += vector.getX();

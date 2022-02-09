@@ -21,10 +21,18 @@ public class Camera {
 
     }
 
+    /**
+     * To prevent having a null entity!
+     * @param object
+     */
     public void focusOn(Entity object){
         this.objectWidhtFocus = Optional.of(object);
     }
 
+    /**
+     * Updating the position of our camera to focus on an entity!
+     * @param state
+     */
     public void update(State state){
         if(objectWidhtFocus.isPresent()){
             Position objectPosition = objectWidhtFocus.get().getPosition();
@@ -35,6 +43,10 @@ public class Camera {
         }
     }
 
+    /**
+     * To make the camera focus only on the entity on the mid. of the screen.
+     * @param state
+     */
     private void clampWithinBounds(State state) {
         if(position.getX() < 0){
             position.setX(0);

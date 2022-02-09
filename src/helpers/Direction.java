@@ -15,6 +15,11 @@ public enum Direction {
         this.animationRow = animationRow;
     }
 
+    /**
+     * Identify the direction of a moving entity!
+     * @param motion
+     * @return animationRow
+     */
     public static Direction fromMotion(Motion motion){
         double x = motion.getVector().getX();
         double y = motion.getVector().getY();

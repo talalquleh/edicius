@@ -2,7 +2,7 @@ package state;
 
 
 import controller.PlayerController;
-import entities.creatures.Player;
+import entities.Player;
 import helpers.Size;
 import input.Input;
 import worlds.GameMap;

@@ -11,6 +11,10 @@ public class Motion {
         this.speed = speed;
     }
 
+    /**
+     * Updating the position of the moving entity, according to the controller provided by this moving entity!
+     * @param controller
+     */
     public void update(Controller controller ) {
         int deltaX = 0 , deltaY = 0;
 

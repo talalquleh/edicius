@@ -15,16 +15,29 @@ public class Game {
     private Input input;
     private State state;
 
+    /**
+     * Initializing the keyboard inputs.
+     * Displaying the game frame using the Display class with extends JFrame.
+     * Initializing the game state so it can be used in rendering and updating the game!
+     * @param width
+     * @param height
+     */
     public Game(int width, int height){
         input   = new Input();
         display = new Display(width, height, input);
         state   = new GameState(new Size(width, height), input);
     }
 
+    /**
+     * Calling the update function on the State class.
+     */
     public void update(){
         state.update();
     }
 
+    /**
+     * Calling the render function on the Display class and using the game state to draw the graphics properly.
+     */
     public void render(){
         display.render(state);
     }

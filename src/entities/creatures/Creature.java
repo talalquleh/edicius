@@ -7,20 +7,15 @@ import helpers.Motion;
 
 import java.awt.*;
 
+/**
+ * The main class for all the creatures on the game except the player (the player is a moving entity)
+ */
 public class Creature extends Entity {
-    private Controller controller;
-    private Motion motion;
-
-
     public Creature(Controller controller) {
-        this.controller = controller;
-        this.motion = new Motion(2);
     }
 
     @Override
     public void update(State state) {
-        motion.update(controller);
-        position.apply(motion);
     }
 
     @Override
