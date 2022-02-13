@@ -1,6 +1,8 @@
 package state;
 
 import entities.Entity;
+import entities.MovingEntity;
+import entities.Player;
 import game.Time;
 import gfx.SpriteSheet;
 import helpers.Position;
@@ -11,6 +13,8 @@ import worlds.GameMap;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import gfx.Camera;
 
 public class State {
@@ -60,7 +64,13 @@ public class State {
         return this.gameMap;
     }
 
+    public Player getPlayer() { return null; }
+
     public Position getRandomPosition() {
         return gameMap.getRandomPosition();
+    }
+
+    public List<Entity> getCollidingEntities(Entity entities) {
+        return this.gameObjects.stream().filter(other -> other.collidingWith(entities)).collect(Collectors.toList());
     }
 }

@@ -13,4 +13,12 @@ public class Player extends MovingEntity {
 	public Player(Controller controller, SpriteSheet spriteLibrary) {
 		super(controller, spriteLibrary);
 	}
+
+	@Override
+	protected void handleCollision(Entity other) {
+		if(other instanceof Enemies){
+			((Enemies) other).motion.stop();
+		}
+
+	}
 }

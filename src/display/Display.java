@@ -13,6 +13,7 @@ public class Display extends JFrame {
 
 	private Canvas canvas;
 	private Renderer renderer;
+	private DebugRenderer debugRenderer;
 
 	/**
 	 * Creating the game canvas and frame, also creating BufferStrategy to use it on the graphics rendering!
@@ -26,6 +27,7 @@ public class Display extends JFrame {
 		setResizable(false);
 
 		renderer = new Renderer();
+		debugRenderer = new DebugRenderer();
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(width, height));
 		canvas.setFocusable(false);
@@ -44,7 +46,7 @@ public class Display extends JFrame {
 	 * Using the render method from the Renderer class to render those grahics!
 	 * @param state
 	 */
-	public void render(State state){
+	public void render(State state, boolean debugMode){
 		BufferStrategy bufferStartegy = canvas.getBufferStrategy();
 		Graphics graphics = bufferStartegy.getDrawGraphics();
 
@@ -53,6 +55,9 @@ public class Display extends JFrame {
 		graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
 		renderer.render(state, graphics);
+		if(debugMode){
+			debugRenderer.render(state, graphics);
+		}
 
 		graphics.dispose();
 		bufferStartegy.show(); // here the displaying of the whole graphics is happening

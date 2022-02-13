@@ -1,9 +1,11 @@
 package entities;
 
 
-import java.awt.Image;
+import java.awt.*;
 
 import controller.Controller;
+import helpers.CollisionBox;
+import helpers.Size;
 import state.State;
 import gfx.Animation;
 import gfx.SpriteSheet;
@@ -16,6 +18,7 @@ public abstract class MovingEntity extends Entity {
     protected Motion motion;
     protected Animation animation;
     protected Direction direction;
+    protected Size collisionBoxSize;
 
     /**
      * Initilize all the components that are going to be used to update an entity!
@@ -28,6 +31,7 @@ public abstract class MovingEntity extends Entity {
         this.motion = new Motion(2);
         this.animation = new Animation(spriteLibrary.getUnit("dave")); // from here we can change the player by entering the other player name (matt)!
         this.direction = Direction.S;
+        this.collisionBoxSize = new Size(16, 28);
     }
 
     /**
@@ -37,10 +41,33 @@ public abstract class MovingEntity extends Entity {
     @Override
     public void update(State state) { // focus here
         motion.update(controller);
+        handleCollisions(state);
         position.apply(motion);
         manageDirection();
         decideAnimation();
         animation.update(direction);
+    }
+
+    protected void handleCollisions(State state){
+        state.getCollidingEntities(this).forEach(this::handleCollision);
+    }
+
+    protected abstract void handleCollision(Entity other);
+
+    @Override
+    public CollisionBox getCollisionBox() {
+        return new CollisionBox(
+                new Rectangle(
+                    position.intX(),
+                    position.intY(),
+                    (int) collisionBoxSize.getWidth(),
+                    (int) collisionBoxSize.getHeight()
+        )) ;
+    }
+
+    @Override
+    public boolean collidingWith(Entity other) {
+        return getCollisionBox().collidesWith(other.getCollisionBox());
     }
 
     /**

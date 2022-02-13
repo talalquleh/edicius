@@ -1,6 +1,8 @@
 package entities;
 import java.awt.*;
 
+import com.sun.source.doctree.EntityTree;
+import helpers.CollisionBox;
 import state.State;
 import helpers.Position;
 import helpers.Size;
@@ -13,11 +15,14 @@ public abstract class Entity {
     protected Size size;
 
     public Entity(){
-        position = new Position(50, 50);
-        size = new Size(50, 50);
+        position = new Position(75, 75);
+        size = new Size(75, 75);
     }
 
     public abstract void update(State state);
+
+    public abstract CollisionBox getCollisionBox();
+    public abstract boolean collidingWith(Entity other);
 
     public abstract Image getSprite();
 

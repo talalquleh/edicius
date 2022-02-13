@@ -2,7 +2,7 @@ package game;
 public class GameLoop implements Runnable{
 
     public static final int UPDATES_PER_SECOND = 60;
-    private Game game;
+    public static Game game;
 
     private boolean running = false;
     private final double updateRate = 1.0d/UPDATES_PER_SECOND;

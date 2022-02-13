@@ -11,6 +11,8 @@ import java.util.Arrays;
 public class GameMap {
 	private Tile[][] tiles;
 
+	private Maps maps;
+
 	/**
 	 * Initialize all the tails from the SpriteSheet provided!
 	 * @param size
@@ -18,6 +20,7 @@ public class GameMap {
 	 */
 	public GameMap(Size size, SpriteSheet spriteLibrary) {
 		tiles = new Tile[(int) size.getWidth()][(int) size.getHeight()];
+		maps  = new Maps("map3",size);
 		initializeTiles(spriteLibrary);
 	}
 
@@ -25,6 +28,10 @@ public class GameMap {
 		for (Tile[] row: tiles){
 			Arrays.fill(row, new Tile(spriteSheet));
 		}
+	}
+
+	public Maps getMap() {
+		return maps;
 	}
 
 	public Tile[][] getTiles() {
