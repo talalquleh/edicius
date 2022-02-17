@@ -3,6 +3,9 @@ package entities;
 
 import controller.Controller;
 import gfx.SpriteSheet;
+import helpers.CollisionBox;
+
+import java.util.List;
 
 public class Player extends MovingEntity {
 	/**
@@ -20,5 +23,8 @@ public class Player extends MovingEntity {
 			((Enemies) other).motion.stop();
 		}
 
+		for (CollisionBox box: getMapCollisionBoxes() ) {
+			if (box.collidesWith(this.getCollisionBox())) this.motion.stop();
+		}
 	}
 }

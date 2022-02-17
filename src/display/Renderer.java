@@ -35,7 +35,7 @@ public class Renderer {
 		for(int x = 0; x < tiles.length; x++){
 			for(int y = 0 ; y < tiles[0].length; y++){
 				graphics.drawImage(
-						(state.getGameMap().getMap().getMap()[x][y] == 1) ? tiles[x][y].getWall() : tiles[x][y].getFloor(),
+						(state.getMap("map1.txt")[x][y] == 1) ? tiles[x][y].getWall() : tiles[x][y].getFloor(),
 						x * Game.SPRITE_SIZE - camera.getPosition().intX(),
 						y * Game.SPRITE_SIZE - camera.getPosition().intY(),
 						null

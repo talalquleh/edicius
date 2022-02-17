@@ -73,4 +73,6 @@ public class State {
     public List<Entity> getCollidingEntities(Entity entities) {
         return this.gameObjects.stream().filter(other -> other.collidingWith(entities)).collect(Collectors.toList());
     }
+
+    public int[][] getMap(String name){ return this.gameMap.getMaps(name);}
 }

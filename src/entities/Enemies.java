@@ -4,6 +4,7 @@ import controller.Controller;
 import enemyAI.Brain;
 import gfx.Animation;
 import gfx.SpriteSheet;
+import helpers.CollisionBox;
 import state.State;
 
 public class Enemies extends MovingEntity {
@@ -23,7 +24,12 @@ public class Enemies extends MovingEntity {
 
     @Override
     protected void handleCollision(Entity other) {
-
+        if(other instanceof Player){
+            ((Player) other).motion.stop();
+        }
+        for (CollisionBox box: getMapCollisionBoxes() ) {
+            if (box.collidesWith(this.getCollisionBox())) this.motion.stop();
+        }
     }
 
     @Override

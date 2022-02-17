@@ -3,16 +3,17 @@ package gfx;
 import game.Game;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.*;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class SpriteSheet {
 
     private Map<String, SpriteSet> units;
     private Map<String, Image> tiles;
+
 
     public SpriteSheet() {
         units = new HashMap<>();

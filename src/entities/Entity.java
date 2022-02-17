@@ -15,7 +15,7 @@ public abstract class Entity {
     protected Size size;
 
     public Entity(){
-        position = new Position(75, 75);
+        position = new Position(100, 100);
         size = new Size(75, 75);
     }
 
