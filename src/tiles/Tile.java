@@ -5,11 +5,17 @@ import gfx.SpriteSheet;
 import java.awt.*;
 
 public class Tile {
-    private Image sprite;
+    private Image floor;
+    private Image wall;
     public Tile(SpriteSheet spriteSheet){
-        this.sprite = spriteSheet.getTiles("floor");
+        this.floor = spriteSheet.getTiles("floor");
+        this.wall = spriteSheet.getTiles("wall");
     }
-    public Image getSprite(){
-        return sprite;
+    public Image getFloor(){
+        return floor;
+    }
+
+    public Image getWall(){
+        return wall;
     }
 }

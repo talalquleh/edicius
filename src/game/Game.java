@@ -2,6 +2,8 @@ package game;
 
 
 import display.Display;
+import entities.Player;
+import settings.GameSettings;
 import state.GameState;
 import state.State;
 import helpers.Size;
@@ -14,6 +16,7 @@ public class Game {
     private Display display;
     private Input input;
     private State state;
+    private GameSettings settings;
 
     /**
      * Initializing the keyboard inputs.
@@ -23,9 +26,10 @@ public class Game {
      * @param height
      */
     public Game(int width, int height){
-        input   = new Input();
-        display = new Display(width, height, input);
-        state   = new GameState(new Size(width, height), input);
+        input    = new Input();
+        display  = new Display(width, height, input);
+        state    = new GameState(new Size(width, height), input);
+        settings = new GameSettings(true);
     }
 
     /**
@@ -39,7 +43,11 @@ public class Game {
      * Calling the render function on the Display class and using the game state to draw the graphics properly.
      */
     public void render(){
-        display.render(state);
+        display.render(state, settings.isDebugMode());
+    }
+
+    public Player getPlayer(){
+        return this.state.getPlayer();
     }
 
 }

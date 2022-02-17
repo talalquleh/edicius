@@ -1,14 +1,20 @@
 package entities;
 
 
-import java.awt.Image;
+import java.awt.*;
+import java.util.ArrayList;
 
 import controller.Controller;
+import game.Game;
+import game.GameLoop;
+import helpers.CollisionBox;
+import helpers.Size;
 import state.State;
 import gfx.Animation;
 import gfx.SpriteSheet;
 import helpers.Direction;
 import helpers.Motion;
+import java.util.List;
 
 public abstract class MovingEntity extends Entity {
 
@@ -16,6 +22,8 @@ public abstract class MovingEntity extends Entity {
     protected Motion motion;
     protected Animation animation;
     protected Direction direction;
+    protected Size collisionBoxSize;
+    protected State state;
 
     /**
      * Initilize all the components that are going to be used to update an entity!
@@ -28,6 +36,7 @@ public abstract class MovingEntity extends Entity {
         this.motion = new Motion(2);
         this.animation = new Animation(spriteLibrary.getUnit("dave")); // from here we can change the player by entering the other player name (matt)!
         this.direction = Direction.S;
+        this.collisionBoxSize = new Size(16, 28);
     }
 
     /**
@@ -36,11 +45,49 @@ public abstract class MovingEntity extends Entity {
      */
     @Override
     public void update(State state) { // focus here
+        this.state = state;
         motion.update(controller);
+        handleCollisions(state);
         position.apply(motion);
         manageDirection();
         decideAnimation();
         animation.update(direction);
+    }
+
+    protected void handleCollisions(State state){
+        state.getCollidingEntities(this).forEach(this::handleCollision);
+    }
+
+    protected abstract void handleCollision(Entity other);
+
+    @Override
+    public CollisionBox getCollisionBox() {
+        return new CollisionBox(
+                new Rectangle(
+                    position.intX(),
+                    position.intY(),
+                    (int) collisionBoxSize.getWidth(),
+                    (int) collisionBoxSize.getHeight()
+        )) ;
+    }
+
+    @Override
+    public boolean collidingWith(Entity other) {
+        return getCollisionBox().collidesWith(other.getCollisionBox());
+    }
+
+    protected List<CollisionBox> getMapCollisionBoxes(){
+        List<CollisionBox> mcb = new ArrayList<CollisionBox>();
+        for (int i = 0; i < this.state.getMap("map1.txt").length ; i++) {
+            for (int j = 0; j < this.state.getMap("map1.txt").length; j++) {
+                if(this.state.getMap("map1.txt")[i][j] == 1){
+                    mcb.add( new CollisionBox(
+                            new Rectangle(Game.SPRITE_SIZE * i , Game.SPRITE_SIZE * j , Game.SPRITE_SIZE, Game.SPRITE_SIZE))
+                    );
+                }
+            }
+        }
+        return mcb;
     }
 
     /**
