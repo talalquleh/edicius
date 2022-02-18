@@ -7,7 +7,7 @@ import gfx.SpriteSheet;
 import helpers.CollisionBox;
 import state.State;
 
-public class Enemies extends MovingEntity {
+public class Enemy extends MovingEntity {
 
     private Brain brain;
     /**
@@ -16,7 +16,7 @@ public class Enemies extends MovingEntity {
      * @param controller
      * @param spriteLibrary
      */
-    public Enemies(Controller controller, SpriteSheet spriteLibrary) {
+    public Enemy(Controller controller, SpriteSheet spriteLibrary) {
         super(controller, spriteLibrary);
         animation = new Animation(spriteLibrary.getUnit("matt"));
         brain = new Brain();
@@ -24,11 +24,16 @@ public class Enemies extends MovingEntity {
 
     @Override
     protected void handleCollision(Entity other) {
-        if(other instanceof Player){
+    /*    if(other instanceof Player){
             ((Player) other).motion.stop();
-        }
+        }*/
         for (CollisionBox box: getMapCollisionBoxes() ) {
-            if (box.collidesWith(this.getCollisionBox())) this.motion.stop();
+            if (box.collidesWith(this.getCollisionBox())) {
+                if(this.getPosition().intX()==this.getCollisionBox().getBounds().getX() && this.getPosition().intY()==this.getCollisionBox().getBounds().getY())  {
+                    System.out.println("us");
+                }
+            }
+
         }
     }
 

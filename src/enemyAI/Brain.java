@@ -3,7 +3,7 @@ package enemyAI;
 import enemyAI.EnemyState.EnemyState;
 import enemyAI.EnemyState.Stand;
 import enemyAI.EnemyState.Wonder;
-import entities.Enemies;
+import entities.Enemy;
 import state.State;
 
 public class Brain {
@@ -16,7 +16,7 @@ public class Brain {
     //   this.currentState = currentState;
     //}
 
-    public void update(State state, Enemies currentEnemy){
+    public void update(State state, Enemy currentEnemy){
         currentState.update(state, currentEnemy);
         if(currentState.shouldTransition(state, currentEnemy)){
             transitionTo(currentState.getNextState());

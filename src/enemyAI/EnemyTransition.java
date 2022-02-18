@@ -1,6 +1,6 @@
 package enemyAI;
 
-import entities.Enemies;
+import entities.Enemy;
 import state.State;
 
 public class EnemyTransition {
@@ -12,7 +12,7 @@ public class EnemyTransition {
         this.condition = condition;
     }
 
-    public boolean shouldTransition(State state, Enemies currentEnemy){
+    public boolean shouldTransition(State state, Enemy currentEnemy){
         return condition.isMet(state, currentEnemy);
     }
 

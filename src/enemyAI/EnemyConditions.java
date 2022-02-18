@@ -1,8 +1,8 @@
 package enemyAI;
 
-import entities.Enemies;
+import entities.Enemy;
 import state.State;
 
 public interface EnemyConditions {
-    boolean isMet(State state, Enemies enemy);
+    boolean isMet(State state, Enemy enemy);
 }

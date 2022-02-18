@@ -2,7 +2,7 @@ package controller;
 
 import helpers.Position;
 
-public class EnemiesController implements Controller{
+public class EnemyController implements Controller{
 
     private boolean up, right, down, left;
 
@@ -12,7 +12,7 @@ public class EnemiesController implements Controller{
     }
 
     @Override
-    public boolean isRequestingRigth() {
+    public boolean isRequestingRight() {
         return right;
     }
 

@@ -1,7 +1,7 @@
 package enemyAI.EnemyState;
 
 import enemyAI.EnemyTransition;
-import entities.Enemies;
+import entities.Enemy;
 import state.State;
 
 public abstract class EnemyState {
@@ -13,9 +13,9 @@ public abstract class EnemyState {
     }
 
     protected abstract EnemyTransition initializeTransition();
-    public abstract void update(State state, Enemies currentEnemy);
+    public abstract void update(State state, Enemy currentEnemy);
 
-    public boolean shouldTransition(State state, Enemies currentEnemy){
+    public boolean shouldTransition(State state, Enemy currentEnemy){
         return transition.shouldTransition(state, currentEnemy);
     }
 

@@ -1,9 +1,9 @@
 package state;
 
 
-import controller.EnemiesController;
+import controller.EnemyController;
 import controller.PlayerController;
-import entities.Enemies;
+import entities.Enemy;
 import entities.Player;
 import game.Game;
 import helpers.Position;
@@ -24,9 +24,9 @@ public class GameState extends State{
 
     private void initializeEntities() {
         player = new Player(new PlayerController(input) , spriteLibrary);
-        Enemies enemies = new Enemies(new EnemiesController(), spriteLibrary);
-        enemies.setPosition(new Position(3 * Game.SPRITE_SIZE, 2 * Game.SPRITE_SIZE));
-        gameObjects.addAll(List.of(player, enemies));
+        Enemy enemy1 = new Enemy(new EnemyController(), spriteLibrary);
+        enemy1.setPosition(new Position(3 * Game.SPRITE_SIZE, 2 * Game.SPRITE_SIZE));
+        gameObjects.addAll(List.of(player, enemy1));
         camera.focusOn(player);
     }
 

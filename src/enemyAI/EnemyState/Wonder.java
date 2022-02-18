@@ -1,10 +1,9 @@
 package enemyAI.EnemyState;
 
-import controller.EnemiesController;
+import controller.EnemyController;
 import enemyAI.EnemyTransition;
-import entities.Enemies;
+import entities.Enemy;
 import entities.Player;
-import game.Game;
 import game.GameLoop;
 import helpers.Position;
 import state.State;
@@ -28,11 +27,11 @@ public class Wonder extends EnemyState{
     }
 
     @Override
-    public void update(State state, Enemies currentEnemy) {
+    public void update(State state, Enemy currentEnemy) {
         if(this.targets.isEmpty()){
             targets.add(state.getRandomPosition());
         }
-        EnemiesController controller = (EnemiesController) currentEnemy.getController();
+        EnemyController controller = (EnemyController) currentEnemy.getController();
         controller.moveToTarget(player.getPosition(), currentEnemy.getPosition());
 
         if(arrived(currentEnemy)){
@@ -40,7 +39,7 @@ public class Wonder extends EnemyState{
         }
     }
 
-    private boolean arrived(Enemies currentEnemy) {
+    private boolean arrived(Enemy currentEnemy) {
         return currentEnemy.getPosition().isInRangeOf(player.getPosition());
     }
 }

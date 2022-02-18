@@ -27,7 +27,7 @@ public class Motion {
         if(controller.isRequestingLeft()) {
             deltaX--;
         }
-        if(controller.isRequestingRigth()) {
+        if(controller.isRequestingRight()) {
             deltaX++;
         }
         this.vector = new Vector2D(deltaX , deltaY);
@@ -46,4 +46,6 @@ public class Motion {
     public void stop(){
         vector = new Vector2D(0, 0);
     }
+
+
 }

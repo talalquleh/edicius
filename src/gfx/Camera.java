@@ -13,7 +13,7 @@ public class Camera {
     private Position position;
     private Size windowSize;
 
-    private Optional<Entity> objectWidhtFocus;
+    private Optional<Entity> objectWidthFocus;
 
     public Camera(Size windowSize) {
         this.position = new Position(0,0);
@@ -26,7 +26,7 @@ public class Camera {
      * @param object
      */
     public void focusOn(Entity object){
-        this.objectWidhtFocus = Optional.of(object);
+        this.objectWidthFocus = Optional.of(object);
     }
 
     /**
@@ -34,8 +34,8 @@ public class Camera {
      * @param state
      */
     public void update(State state){
-        if(objectWidhtFocus.isPresent()){
-            Position objectPosition = objectWidhtFocus.get().getPosition();
+        if(objectWidthFocus.isPresent()){
+            Position objectPosition = objectWidthFocus.get().getPosition();
             this.position.setX(objectPosition.getX() - windowSize.getWidth() / 2);
             this.position.setY(objectPosition.getY() - windowSize.getHeight()/ 2);
 
