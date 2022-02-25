@@ -29,13 +29,12 @@ public class Enemy extends MovingEntity {
         }*/
         for (CollisionBox box: getMapCollisionBoxes() ) {
             if (box.collidesWith(this.getCollisionBox())) {
-                if(this.getPosition().intX()==this.getCollisionBox().getBounds().getX() && this.getPosition().intY()==this.getCollisionBox().getBounds().getY())  {
-                    System.out.println("us");
+                    handleWallCollision();
                 }
             }
 
         }
-    }
+
 
     @Override
     public void update(State state){

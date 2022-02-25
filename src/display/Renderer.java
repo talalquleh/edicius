@@ -1,7 +1,7 @@
 package display;
 
-import java.awt.Graphics;
-
+//import java.awt.Graphics;
+import java.awt.*;
 import game.Game;
 import state.State;
 import tiles.Tile;
@@ -19,9 +19,10 @@ public class Renderer {
 		Camera camera = state.getCamera();
 		state.getGameObjects().forEach(gameObject -> graphics.drawImage(
 				gameObject.getSprite(),
-				(int) gameObject.getPosition().intX() - camera.getPosition().intX() -(int) gameObject.getSize().getWidth() / 2,
-				(int) gameObject.getPosition().intY() - camera.getPosition().intY() - (int)gameObject.getSize().getHeight() / 2,
-				null));
+				gameObject.getPosition().intX() - camera.getPosition().intX() - (int) gameObject.getSize().getWidth() / 2,
+				gameObject.getPosition().intY() - camera.getPosition().intY() - (int)gameObject.getSize().getHeight() / 2,
+				null
+		));
 	}
 
 	/**
