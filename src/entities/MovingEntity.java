@@ -36,7 +36,7 @@ public abstract class MovingEntity extends Entity {
         this.motion = new Motion(2);
         this.animation = new Animation(spriteLibrary.getUnit("dave")); // from here we can change the player by entering the other player name (matt)!
         this.direction = Direction.S;
-        this.collisionBoxSize = new Size(16, 28);
+        this.collisionBoxSize = new Size(28, 16);
     }
 
     /**
@@ -64,8 +64,8 @@ public abstract class MovingEntity extends Entity {
     public CollisionBox getCollisionBox() {
         return new CollisionBox(
                 new Rectangle(
-                    position.intX(),
-                    position.intY(),
+                        position.intX() - (int) collisionBoxSize.getWidth()/2  -2,
+                        position.intY() - (int) collisionBoxSize.getHeight()/2,
                     (int) collisionBoxSize.getWidth(),
                     (int) collisionBoxSize.getHeight()
         )) ;
@@ -88,6 +88,41 @@ public abstract class MovingEntity extends Entity {
             }
         }
         return mcb;
+    }
+
+    protected void handleWallCollision(){
+        switch (this.direction){
+            case S:
+                this.position.setY(this.position.getY() - 2);
+                break;
+            case E:
+                this.position.setX(this.position.getX() - 2);
+                break;
+            case N:
+                this.position.setY(this.position.getY() + 2);
+                break;
+            case W:
+                this.position.setX(this.position.getX() + 2);
+                break;
+            case NE:
+                this.position.setX(this.position.getX() - 2);
+                this.position.setY(this.position.getY() + 2);
+                break;
+            case NW:
+                this.position.setX(this.position.getX() + 2);
+                this.position.setY(this.position.getY() + 2);
+                break;
+            case SE:
+                this.position.setX(this.position.getX() - 2);
+                this.position.setY(this.position.getY() - 2);
+                break;
+            case SW:
+                this.position.setX(this.position.getX() + 2);
+                this.position.setY(this.position.getY() - 2);
+                break;
+            default:
+                break;
+        }
     }
 
     /**
