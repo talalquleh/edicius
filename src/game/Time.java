@@ -7,7 +7,7 @@ public class Time {
         this.updatesSinceStart = 0;
     }
 
-    public int getUpdatesFromSeconds(int seconds){
+    public static int getUpdatesFromSeconds(int seconds){
         return seconds * GameLoop.UPDATES_PER_SECOND;
     }
 
