@@ -46,6 +46,10 @@ public class Motion {
     public void stop(){
         vector = new Vector2D(0, 0);
     }
-
+    public void setMotion(double speed){
+        this.vector = new Vector2D(0,0);
+        this.speed = speed;
+    }
+    public double getSpeed(){return this.speed;}
 
 }

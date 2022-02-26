@@ -29,7 +29,7 @@ public class Enemy extends MovingEntity {
         }*/
         for (CollisionBox box: getMapCollisionBoxes() ) {
             if (box.collidesWith(this.getCollisionBox())) {
-                    handleWallCollision();
+                handleWallCollision(this.motion.getSpeed());
                 }
             }
 

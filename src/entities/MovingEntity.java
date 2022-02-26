@@ -90,37 +90,38 @@ public abstract class MovingEntity extends Entity {
         return mcb;
     }
 
-    protected void handleWallCollision(){
+    protected void handleWallCollision(double speed){
         switch (this.direction){
             case S:
-                this.position.setY(this.position.getY() - 2);
+                this.position.setY(this.position.getY() - speed);
                 break;
             case E:
-                this.position.setX(this.position.getX() - 2);
+                this.position.setX(this.position.getX() - speed);
                 break;
             case N:
-                this.position.setY(this.position.getY() + 2);
+                this.position.setY(this.position.getY() + speed);
                 break;
             case W:
-                this.position.setX(this.position.getX() + 2);
+                this.position.setX(this.position.getX() + speed);
                 break;
             case NE:
-                this.position.setX(this.position.getX() - 2);
-                this.position.setY(this.position.getY() + 2);
+                this.position.setX(this.position.getX() - speed);
+                this.position.setY(this.position.getY() + speed);
                 break;
             case NW:
-                this.position.setX(this.position.getX() + 2);
-                this.position.setY(this.position.getY() + 2);
+                this.position.setX(this.position.getX() + speed);
+                this.position.setY(this.position.getY() + speed);
                 break;
             case SE:
-                this.position.setX(this.position.getX() - 2);
-                this.position.setY(this.position.getY() - 2);
+                this.position.setX(this.position.getX() - speed);
+                this.position.setY(this.position.getY() - speed);
                 break;
             case SW:
-                this.position.setX(this.position.getX() + 2);
-                this.position.setY(this.position.getY() - 2);
+                this.position.setX(this.position.getX() + speed);
+                this.position.setY(this.position.getY() - speed);
                 break;
             default:
+
                 break;
         }
     }
