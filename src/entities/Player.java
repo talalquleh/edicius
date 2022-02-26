@@ -12,7 +12,7 @@ public class Player extends MovingEntity {
 	 * @param spriteLibrary
 	 */
 	public Player(Controller controller, SpriteSheet spriteLibrary) {
-		super(controller, spriteLibrary);
+		super(controller, spriteLibrary);motion.setMotion(4.0);
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class Player extends MovingEntity {
 		}
 	for (CollisionBox box: getMapCollisionBoxes() ) {
 			if (box.collidesWith(this.getCollisionBox())) {
-				handleWallCollision();
+				handleWallCollision(this.motion.getSpeed());
 
 			}
 		}
