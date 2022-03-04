@@ -12,9 +12,6 @@ public class Brain {
     public Brain() {
         transitionTo("stand");
     }
-//public Brain(EnemyState currentState) {
-    //   this.currentState = currentState;
-    //}
 
     public void update(State state, Enemy currentEnemy){
         currentState.update(state, currentEnemy);

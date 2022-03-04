@@ -20,10 +20,9 @@ public class Player extends MovingEntity {
 		if(other instanceof Enemy){
 			((Enemy) other).motion.stop();
 		}
-	for (CollisionBox box: getMapCollisionBoxes() ) {
+		for (CollisionBox box: getMapCollisionBoxes() ) {
 			if (box.collidesWith(this.getCollisionBox())) {
 				handleWallCollision(this.motion.getSpeed());
-
 			}
 		}
 	}

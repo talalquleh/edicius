@@ -2,10 +2,18 @@ package display;
 
 //import java.awt.Graphics;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+
+import entities.Entity;
+import entities.Shot;
 import game.Game;
+import helpers.Position;
 import state.State;
 import tiles.Tile;
 import gfx.Camera;
+
+import javax.imageio.ImageIO;
 
 public class Renderer {
 
@@ -17,12 +25,28 @@ public class Renderer {
 	public void render(State state, Graphics graphics) {
 		renderMap(state , graphics);
 		Camera camera = state.getCamera();
-		state.getGameObjects().forEach(gameObject -> graphics.drawImage(
-				gameObject.getSprite(),
-				gameObject.getPosition().intX() - camera.getPosition().intX() - (int) gameObject.getSize().getWidth() / 2,
-				gameObject.getPosition().intY() - camera.getPosition().intY() - (int)gameObject.getSize().getHeight() / 2,
-				null
-		));
+		for (Entity gameObject: state.getGameObjects()) {
+
+			if(gameObject instanceof Shot){
+				Shot shot = ((Shot) gameObject);
+				graphics.drawImage( shot.getShotImage(),
+						gameObject.getPosition().intX() - camera.getPosition().intX() - (int) gameObject.getSize().getWidth() / 2,
+						gameObject.getPosition().intY() - camera.getPosition().intY() - (int) gameObject.getSize().getHeight() / 2,
+						15,
+						15,
+						null
+				);
+				shot.shoot(new Position(Display.mousePosition.getX(), Display.mousePosition.getY()));
+
+			}else{
+				graphics.drawImage(
+						gameObject.getSprite(),
+						gameObject.getPosition().intX() - camera.getPosition().intX() - (int) gameObject.getSize().getWidth() / 2,
+						gameObject.getPosition().intY() - camera.getPosition().intY() - (int)gameObject.getSize().getHeight() / 2,
+						null
+				);
+			}
+		}
 	}
 
 	/**

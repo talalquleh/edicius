@@ -24,16 +24,12 @@ public class Enemy extends MovingEntity {
 
     @Override
     protected void handleCollision(Entity other) {
-    /*    if(other instanceof Player){
-            ((Player) other).motion.stop();
-        }*/
         for (CollisionBox box: getMapCollisionBoxes() ) {
             if (box.collidesWith(this.getCollisionBox())) {
                 handleWallCollision(this.motion.getSpeed());
-                }
             }
-
         }
+    }
 
 
     @Override

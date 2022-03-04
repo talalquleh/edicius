@@ -1,13 +1,10 @@
 package gfx;
 
-import game.Game;
-
 import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class SpriteSheet {
 

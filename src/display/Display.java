@@ -1,8 +1,12 @@
 package display;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
-//import javax.swing.JFrame;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import state.State;
 import input.Input;
@@ -10,6 +14,7 @@ import input.Input;
 public class Display extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	public static Point mousePosition = new Point(0, 0);
 
 
 	private Canvas canvas;
@@ -33,6 +38,32 @@ public class Display extends JFrame {
 		canvas.setPreferredSize(new Dimension(width, height));
 		canvas.setFocusable(false);
 		add(canvas);
+
+		try {
+			Image customImage = ImageIO.read(new File("res/cursor.png"));
+			Cursor customCursor = Toolkit.getDefaultToolkit().createCustomCursor(customImage, new Point(0, 0), "customCursor");
+			this.setCursor(customCursor);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		canvas.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mousePosition.setLocation(e.getX(), e.getY());
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+		});
+
 		addKeyListener(input);
 		pack();
 
