@@ -13,6 +13,7 @@ import worlds.GameMap;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,8 @@ public class State {
     protected Input input;
     protected Camera camera;
     protected Time time;
+    public Position lastCameraPosition;
+    public HashMap<Entity, Position> lastEntityPositions;
 
     public State(Size windowSize, Input input) {
         this.input = input;
@@ -34,6 +37,7 @@ public class State {
         gameMap = new GameMap(new Size(50, 50), spriteLibrary);
         camera = new Camera(windowSize);
         time = new Time();
+        lastEntityPositions = new HashMap<>();
     }
 
     public Time getTime() {

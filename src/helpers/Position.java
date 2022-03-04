@@ -51,4 +51,13 @@ public class Position {
         return 		(Math.abs(x -position.getX()) < Position.PROXIMITY_RANGE)
                 && 	(Math.abs(y -position.getY()) < Position.PROXIMITY_RANGE);
     }
+    public boolean equals(Object other)
+    {
+        if (other == null || !(other instanceof Position)) return false;
+        return ((Position)other).getX() == x && ((Position)other).getY() == y;
+    }
+    public String toString()
+    {
+        return "(" + x + ", " + y + ")";
+    }
 }

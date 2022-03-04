@@ -2,6 +2,7 @@ package entities;
 
 import controller.Controller;
 import gfx.SpriteSheet;
+import helpers.CollisionBox;
 import helpers.Position;
 
 import javax.imageio.ImageIO;
@@ -23,7 +24,14 @@ public class Shot extends MovingEntity {
 
     @Override
     protected void handleCollision(Entity other) {
-
+        if(other instanceof Enemy){
+            ((Enemy) other).motion.stop();
+        }
+        for (CollisionBox box: getMapCollisionBoxes() ) {
+            if (box.collidesWith(this.getCollisionBox())) {
+                handleWallCollision(this.motion.getSpeed());
+            }
+        }
     }
 
     public void shoot(Position target){

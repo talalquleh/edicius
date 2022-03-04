@@ -81,8 +81,8 @@ public class Display extends JFrame {
 	public void render(State state, boolean debugMode){
 		BufferStrategy bufferStartegy = canvas.getBufferStrategy();
 		Graphics graphics = bufferStartegy.getDrawGraphics();
-		graphics.setColor(Color.BLACK);
-		graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		//graphics.setColor(Color.BLACK);
+		//graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
 		renderer.render(state, graphics);
 		if(debugMode){
