@@ -1,8 +1,9 @@
 package state;
 
+import entities.Enemy;
 import entities.Entity;
-import entities.MovingEntity;
 import entities.Player;
+import entities.Shot;
 import game.Time;
 import gfx.SpriteSheet;
 import helpers.Position;
@@ -10,7 +11,6 @@ import helpers.Size;
 import input.Input;
 import worlds.GameMap;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -27,6 +27,7 @@ public class State {
     protected Input input;
     protected Camera camera;
     protected Time time;
+    protected List<Shot> shots;
     public Position lastCameraPosition;
     public HashMap<Entity, Position> lastEntityPositions;
 
@@ -37,6 +38,7 @@ public class State {
         gameMap = new GameMap(new Size(50, 50), spriteLibrary);
         camera = new Camera(windowSize);
         time = new Time();
+        shots = new ArrayList<>();
         lastEntityPositions = new HashMap<>();
     }
 
@@ -80,4 +82,16 @@ public class State {
     }
 
     public int[][] getMap(String name){ return this.gameMap.getMaps(name);}
+
+    public void addShot(Shot shot){
+        this.shots.add(shot);
+    }
+
+    public List<Shot> getShots() {
+        return shots;
+    }
+
+    public List<Enemy> getEnemies(){
+        return null;
+    }
 }

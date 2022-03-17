@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import controller.Controller;
 import game.Game;
-import game.GameLoop;
 import helpers.CollisionBox;
 import helpers.Size;
 import state.State;
@@ -36,7 +35,7 @@ public abstract class MovingEntity extends Entity {
         this.motion = new Motion(2);
         this.animation = new Animation(spriteLibrary.getUnit("dave")); // from here we can change the player by entering the other player name (matt)!
         this.direction = Direction.S;
-        this.collisionBoxSize = new Size(28, 16);
+        this.collisionBoxSize = new Size(16, 28);
     }
 
     /**
