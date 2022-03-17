@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import state.State;
 import input.Input;
 
@@ -15,6 +16,7 @@ public class Display extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	public static Point mousePosition = new Point(0, 0);
+	public static Boolean shooting = false;
 
 
 	private Canvas canvas;
@@ -52,6 +54,7 @@ public class Display extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				mousePosition.setLocation(e.getX(), e.getY());
+				shooting = true;
 			}
 
 			@Override
@@ -81,8 +84,6 @@ public class Display extends JFrame {
 	public void render(State state, boolean debugMode){
 		BufferStrategy bufferStartegy = canvas.getBufferStrategy();
 		Graphics graphics = bufferStartegy.getDrawGraphics();
-		//graphics.setColor(Color.BLACK);
-		//graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
 		renderer.render(state, graphics);
 		if(debugMode){

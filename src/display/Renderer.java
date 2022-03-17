@@ -1,12 +1,13 @@
 package display;
 
-//import java.awt.Graphics;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
+import entities.Enemy;
 import entities.Entity;
+import entities.Player;
 import entities.Shot;
 import game.Game;
 import helpers.Position;
@@ -14,8 +15,6 @@ import helpers.Size;
 import state.State;
 import tiles.Tile;
 import gfx.Camera;
-
-import javax.imageio.ImageIO;
 
 public class Renderer {
 
@@ -41,8 +40,7 @@ public class Renderer {
 		Camera camera = state.getCamera();
 		boolean renderedFullMap = false;
 		if (!camera.getPosition().equals(state.lastCameraPosition)) {
-			state.lastCameraPosition = new Position(camera.getPosition().getX(),
-					camera.getPosition().getY());
+			state.lastCameraPosition = new Position(camera.getPosition().getX(), camera.getPosition().getY());
 			renderMap(state, graphics, 0, 0, tiles.length, tiles[0].length);
 			renderedFullMap = true;
 		}
@@ -50,46 +48,42 @@ public class Renderer {
 		java.util.List<Entity> changedEntities = new ArrayList<>();
 		java.util.List<Rectangle> changedRects = new ArrayList<>();
 		for (int i = 0; i < state.getGameObjects().size(); i++) {
-			for (Entity gameObject: state.getGameObjects()) {
-				Rectangle initRect = entityToTile(entityToPixel(gameObject.getPosition(),
-						gameObject.getSize()));
+			for (Entity gameObject : state.getGameObjects()) {
+				Rectangle initRect = entityToTile(entityToPixel(gameObject.getPosition(), gameObject.getSize()));
 				final Rectangle rect;
-				if (!state.lastEntityPositions.containsKey(gameObject)) rect = initRect;
-				else rect = initRect.union(entityToTile(entityToPixel(state.lastEntityPositions.get(gameObject),
-						gameObject.getSize())));
-				if (state.lastEntityPositions.containsKey(gameObject) &&
-						state.lastEntityPositions.get(gameObject) == gameObject.getPosition()) {
+
+				if (!state.lastEntityPositions.containsKey(gameObject)) {
+					rect = initRect;
+				}
+				else{
+					rect = initRect.union(entityToTile(entityToPixel(state.lastEntityPositions.get(gameObject), gameObject.getSize())));
+				}
+				if (state.lastEntityPositions.containsKey(gameObject) && state.lastEntityPositions.get(gameObject) == gameObject.getPosition()) {
 					if (changedRects.stream().noneMatch(x -> rect.intersects(x))) continue;
 				}
-				if (!renderedFullMap)
-					renderMap(state, graphics, rect.x, rect.y,
-							rect.x + rect.width, rect.y + rect.height);
-				state.lastEntityPositions.put(gameObject, new Position(gameObject.getPosition().getX(),
-						gameObject.getPosition().getY()));
+				if (!renderedFullMap){
+					renderMap(state, graphics, rect.x, rect.y, rect.x + rect.width, rect.y + rect.height);
+				}
+				state.lastEntityPositions.put(gameObject, new Position(gameObject.getPosition().getX(), gameObject.getPosition().getY()));
+
 				changedEntities.add(gameObject);
 				changedRects.add(rect);
 			}
 		}
 		for (Entity gameObject: changedEntities) {
-			if(gameObject instanceof Shot){
-				Shot shot = ((Shot) gameObject);
-				graphics.drawImage( shot.getShotImage(),
-						gameObject.getPosition().intX() - camera.getPosition().intX() - (int) gameObject.getSize().getWidth() / 2,
-						gameObject.getPosition().intY() - camera.getPosition().intY() - (int) gameObject.getSize().getHeight() / 2,
-						15,
-						15,
-						null
-				);
-				shot.shoot(new Position(Display.mousePosition.getX(), Display.mousePosition.getY()));
-
-			}else {
-				graphics.drawImage(
-						gameObject.getSprite(),
-						gameObject.getPosition().intX() - camera.getPosition().intX() - (int) gameObject.getSize().getWidth() / 2,
-						gameObject.getPosition().intY() - camera.getPosition().intY() - (int) gameObject.getSize().getHeight() / 2,
-						null
-				);
-			}
+			graphics.drawImage(
+					gameObject.getSprite(),
+					gameObject.getPosition().intX() - camera.getPosition().intX() - (int) gameObject.getSize().getWidth() / 2,
+					gameObject.getPosition().intY() - camera.getPosition().intY() - (int) gameObject.getSize().getHeight() / 2,
+					null
+			);
+		}
+		if(Display.shooting){
+			Display.shooting = false;
+			state.addShot(new Shot(Display.mousePosition, state.getPlayer()));
+		}
+		for(Shot shot: state.getShots()){
+			shot.shoot(graphics, state.getCamera());
 		}
 	}
 
