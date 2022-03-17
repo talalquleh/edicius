@@ -16,6 +16,7 @@ import state.State;
 import tiles.Tile;
 import gfx.Camera;
 
+
 public class Renderer {
 
 	public Rectangle entityToPixel(Position pos, Size s)
@@ -78,13 +79,16 @@ public class Renderer {
 					null
 			);
 		}
+		
 		if(Display.shooting){
 			Display.shooting = false;
 			state.addShot(new Shot(Display.mousePosition, state.getPlayer()));
 		}
 		for(Shot shot: state.getShots()){
 			shot.shoot(graphics, state.getCamera());
+
 		}
+
 	}
 
 	/**

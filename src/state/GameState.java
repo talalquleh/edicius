@@ -55,7 +55,6 @@ public class GameState extends State{
         }
     }
 
-
     @Override
     public Player getPlayer() {
         return player;

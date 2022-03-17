@@ -1,12 +1,15 @@
 package entities;
 
-
 import gfx.Camera;
+import helpers.CollisionBox;
+import helpers.Position;
+import state.State;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+
 
 public class Shot {
 
@@ -20,13 +23,14 @@ public class Shot {
         this.x = (int) player.getPosition().getX();
         this.y = (int) player.getPosition().getY();
         this.target = target;
+
         try {
             this.shotImage = ImageIO.read(new File("res/sprites/fireShots/fireBall.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
+    
     public Point getPosition(){
         return new Point(x, y);
     }
@@ -42,6 +46,7 @@ public class Shot {
                 this.x - camera.getPosition().intX(),
                 this.y- camera.getPosition().intX(), 15, 15, null);
         System.out.println(this.x + " | " + this.y);
+
     }
 
     public void shotGoing(){

@@ -2,6 +2,10 @@ package controller;
 
 import helpers.Position;
 
+import java.awt.*;
+import java.util.List;
+import java.util.Map;
+
 public class EnemyController implements Controller{
 
     private boolean up, right, down, left;
@@ -14,6 +18,11 @@ public class EnemyController implements Controller{
     @Override
     public boolean isRequestingRight() {
         return right;
+    }
+
+    @Override
+    public Map<Boolean, Point> isMouseClicked() {
+        return null;
     }
 
     @Override

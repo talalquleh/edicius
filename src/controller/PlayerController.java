@@ -1,12 +1,16 @@
 package controller;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.Map;
+
 import input.Input;
 
 /**
  * A class implements the Controller and has methods to determine the pressed key on the keyboard!
  */
-public class PlayerController implements 	Controller {
+public class PlayerController implements Controller {
 	private Input input;
 	
 	public PlayerController(Input input) {
@@ -32,5 +36,10 @@ public class PlayerController implements 	Controller {
 	public boolean isRequestingRight() {
 		return input.isPressed(KeyEvent.VK_RIGHT)|| input.isPressed(KeyEvent.VK_D);
 	}
+
+	public Map<Boolean, Point> isMouseClicked(){
+		return this.input.isClicked();
+	}
+
 
 }

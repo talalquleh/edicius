@@ -30,6 +30,7 @@ public class State {
     protected List<Shot> shots;
     public Position lastCameraPosition;
     public HashMap<Entity, Position> lastEntityPositions;
+    protected ArrayList<Shot> shots;
 
     public State(Size windowSize, Input input) {
         this.input = input;
@@ -93,5 +94,6 @@ public class State {
 
     public List<Enemy> getEnemies(){
         return null;
+
     }
 }

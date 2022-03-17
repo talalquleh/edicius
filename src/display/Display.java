@@ -15,6 +15,7 @@ import input.Input;
 public class Display extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+
 	public static Point mousePosition = new Point(0, 0);
 	public static Boolean shooting = false;
 
