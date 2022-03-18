@@ -19,6 +19,7 @@ public class Enemy extends MovingEntity {
     public Enemy(Controller controller, SpriteSheet spriteLibrary) {
         super(controller, spriteLibrary);
         animation = new Animation(spriteLibrary.getUnit("matt"));
+        //brain = new Brain(getMapCollisionBoxes(), this.getCollisionBox());
         brain = new Brain();
     }
 

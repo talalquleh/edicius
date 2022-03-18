@@ -43,9 +43,9 @@ public class Shot {
     public void shoot(Graphics graphics, Camera camera){
         this.shotGoing();
         graphics.drawImage(this.shotImage,
-                this.x - camera.getPosition().intX(),
-                this.y- camera.getPosition().intX(), 15, 15, null);
-        System.out.println(this.x + " | " + this.y);
+                this.x - camera.getPosition().intX() - 15,
+                this.y - camera.getPosition().intY() - 15, 15, 15, null);
+        //System.out.println(this.x + " | " + this.y);
 
     }
 

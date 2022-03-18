@@ -4,7 +4,6 @@ import entities.Enemy;
 import entities.Entity;
 import entities.Player;
 import entities.Shot;
-import game.Time;
 import gfx.SpriteSheet;
 import helpers.Position;
 import helpers.Size;
@@ -26,11 +25,9 @@ public class State {
     protected SpriteSheet spriteLibrary;
     protected Input input;
     protected Camera camera;
-    protected Time time;
     protected List<Shot> shots;
     public Position lastCameraPosition;
     public HashMap<Entity, Position> lastEntityPositions;
-    protected ArrayList<Shot> shots;
 
     public State(Size windowSize, Input input) {
         this.input = input;
@@ -38,13 +35,8 @@ public class State {
         spriteLibrary = new SpriteSheet();
         gameMap = new GameMap(new Size(50, 50), spriteLibrary);
         camera = new Camera(windowSize);
-        time = new Time();
         shots = new ArrayList<>();
         lastEntityPositions = new HashMap<>();
-    }
-
-    public Time getTime() {
-        return time;
     }
 
     public Camera getCamera() {
@@ -94,6 +86,5 @@ public class State {
 
     public List<Enemy> getEnemies(){
         return null;
-
     }
 }
