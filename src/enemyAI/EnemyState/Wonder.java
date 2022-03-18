@@ -5,6 +5,7 @@ import enemyAI.EnemyTransition;
 import entities.Enemy;
 import entities.Player;
 import game.GameLoop;
+import helpers.CollisionBox;
 import helpers.Position;
 import state.State;
 
@@ -14,11 +15,16 @@ import java.util.List;
 public class Wonder extends EnemyState{
     private List<Position> targets;
     private Player player;
+    private List<CollisionBox> mapCollisionBoxes;
+    private CollisionBox enemyCollisionBox;
 
+    //public Wonder(List<CollisionBox> mapCollisionBoxes, CollisionBox enemyCollisionBox)
     public Wonder() {
         super();
         this.targets = new ArrayList<>();
         this.player = GameLoop.game.getPlayer();
+//        this.enemyCollisionBox = enemyCollisionBox;
+//        this.mapCollisionBoxes = mapCollisionBoxes;
     }
 
     @Override
@@ -32,6 +38,7 @@ public class Wonder extends EnemyState{
             targets.add(state.getRandomPosition());
         }
         EnemyController controller = (EnemyController) currentEnemy.getController();
+       // controller.moveToTarget(player.getPosition(), currentEnemy.getPosition(), mapCollisionBoxes, enemyCollisionBox);
         controller.moveToTarget(player.getPosition(), currentEnemy.getPosition());
 
         if(arrived(currentEnemy)){

@@ -85,8 +85,6 @@ public class GameLoop implements Runnable{
 
     public boolean getRunning(){return this.running;}
     public double getUpdateRate(){return  this.updateRate;}
-    public  long getNextStatTime(){return  this.nextStatTime;}
-    public  int getFps(){return  this.fps;}
     public  int getUps(){return  this.ups;}
 
 }

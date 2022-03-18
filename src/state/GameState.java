@@ -20,7 +20,6 @@ import java.util.Random;
 public class GameState extends State{
     private Player player;
     private List<Enemy> enemy1;
-    private Shot shot;
 
     public GameState(Size windowSize, Input input) {
         super(windowSize, input);
