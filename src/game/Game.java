@@ -32,6 +32,10 @@ public class Game {
         settings = new GameSettings(true);
     }
 
+    public static void log(String str) {
+        System.out.println(str);
+    }
+
     /**
      * Calling the update function on the State class.
      */

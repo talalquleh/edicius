@@ -2,13 +2,9 @@ package display;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 import entities.Enemy;
 import entities.Entity;
-import entities.Player;
-import entities.Shot;
 import game.Game;
 import helpers.Position;
 import helpers.Size;
@@ -60,7 +56,7 @@ public class Renderer {
 					rect = initRect.union(entityToTile(entityToPixel(state.lastEntityPositions.get(gameObject), gameObject.getSize())));
 				}
 				if (state.lastEntityPositions.containsKey(gameObject) && state.lastEntityPositions.get(gameObject) == gameObject.getPosition()) {
-					if (changedRects.stream().noneMatch(x -> rect.intersects(x))) continue;
+					if (changedRects.stream().noneMatch(rect::intersects)) continue;
 				}
 				if (!renderedFullMap){
 					renderMap(state, graphics, rect.x, rect.y, rect.x + rect.width, rect.y + rect.height);
@@ -79,14 +75,13 @@ public class Renderer {
 					null
 			);
 		}
-		
-		if(Display.shooting){
-			Display.shooting = false;
-			state.addShot(new Shot(Display.mousePosition, state.getPlayer()));
-		}
-		for(Shot shot: state.getShots()){
-			shot.shoot(graphics, state.getCamera());
-
+		for (Entity nextElem : changedEntities) {
+			if (nextElem instanceof Enemy) {
+				Enemy en = (Enemy) nextElem;
+				if (en.isTimeToRemoveShot()) {
+					state.getGameObjects().remove(nextElem);
+				}
+			}
 		}
 
 	}

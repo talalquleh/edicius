@@ -3,17 +3,13 @@ package state;
 import entities.Enemy;
 import entities.Entity;
 import entities.Player;
-import entities.Shot;
 import gfx.SpriteSheet;
 import helpers.Position;
 import helpers.Size;
 import input.Input;
 import worlds.GameMap;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import gfx.Camera;
@@ -25,7 +21,8 @@ public class State {
     protected SpriteSheet spriteLibrary;
     protected Input input;
     protected Camera camera;
-    protected List<Shot> shots;
+    protected Player player;
+    protected List<Enemy> enemies;
     public Position lastCameraPosition;
     public HashMap<Entity, Position> lastEntityPositions;
 
@@ -35,7 +32,6 @@ public class State {
         spriteLibrary = new SpriteSheet();
         gameMap = new GameMap(new Size(50, 50), spriteLibrary);
         camera = new Camera(windowSize);
-        shots = new ArrayList<>();
         lastEntityPositions = new HashMap<>();
     }
 
@@ -64,7 +60,7 @@ public class State {
         return this.gameMap;
     }
 
-    public Player getPlayer() { return null; }
+    public Player getPlayer() { return this.player ; }
 
     public Position getRandomPosition() {
         return gameMap.getRandomPosition();
@@ -76,15 +72,11 @@ public class State {
 
     public int[][] getMap(String name){ return this.gameMap.getMaps(name);}
 
-    public void addShot(Shot shot){
-        this.shots.add(shot);
-    }
-
-    public List<Shot> getShots() {
-        return shots;
-    }
-
     public List<Enemy> getEnemies(){
         return null;
     }
+
+    public void addToGameObjects(){
+    }
+
 }
