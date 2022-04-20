@@ -6,13 +6,12 @@ import java.util.ArrayList;
 
 import controller.Controller;
 import game.Game;
-import helpers.CollisionBox;
-import helpers.Size;
+import helpers.*;
 import state.State;
 import gfx.Animation;
 import gfx.SpriteSheet;
-import helpers.Direction;
-import helpers.Motion;
+
+import java.util.Iterator;
 import java.util.List;
 
 public abstract class MovingEntity extends Entity {

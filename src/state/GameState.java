@@ -3,9 +3,9 @@ package state;
 
 import controller.EnemyController;
 import controller.PlayerController;
+import display.Display;
 import entities.Enemy;
 import entities.Player;
-import entities.Shot;
 import game.Game;
 import helpers.Position;
 import helpers.Size;
@@ -18,20 +18,20 @@ import java.util.List;
 import java.util.Random;
 
 public class GameState extends State{
-    private Player player;
-    private List<Enemy> enemy1;
 
     public GameState(Size windowSize, Input input) {
         super(windowSize, input);
         gameMap = new GameMap(new Size(20,20), spriteLibrary);
         player = new Player(new PlayerController(input) , spriteLibrary);
-        enemy1 = new ArrayList<>();
+        enemies = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            enemy1.add(new Enemy(new EnemyController(), spriteLibrary));
+            Enemy enemy = new Enemy(new EnemyController(), spriteLibrary);
+            enemies.add(enemy);
         }
-        placeRandomEnimies(enemy1, this);
+
+        placeRandomEnimies(enemies, this);
         gameObjects.add(player);
-        gameObjects.addAll(enemy1);
+        gameObjects.addAll(enemies);
         camera.focusOn(player);
     }
 
@@ -61,6 +61,17 @@ public class GameState extends State{
 
     @Override
     public List<Enemy> getEnemies(){
-        return this.enemy1;
+        return this.enemies;
+    }
+
+    @Override
+    public void addToGameObjects(){
+        Enemy en = new Enemy(new EnemyController(), spriteLibrary);
+        en.setPosition(player.getPosition());
+        en.setTarget(Display.mousePosition);
+        en.isShot(spriteLibrary);
+
+        gameObjects.add(en);
+
     }
 }

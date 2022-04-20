@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import helpers.Position;
 import state.State;
 import input.Input;
 
@@ -16,7 +17,7 @@ public class Display extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	public static Point mousePosition = new Point(0, 0);
+	public static Position mousePosition = new Position(0, 0);
 	public static Boolean shooting = false;
 
 
@@ -54,7 +55,7 @@ public class Display extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				mousePosition.setLocation(e.getX(), e.getY());
+				mousePosition = new Position(e.getX(), e.getY());
 				shooting = true;
 			}
 
@@ -71,7 +72,7 @@ public class Display extends JFrame {
 		addKeyListener(input);
 		pack();
 
-		canvas.createBufferStrategy(3);
+		canvas.createBufferStrategy(2);
 
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -86,7 +87,15 @@ public class Display extends JFrame {
 		BufferStrategy bufferStartegy = canvas.getBufferStrategy();
 		Graphics graphics = bufferStartegy.getDrawGraphics();
 
+
+		if(shooting){
+			mousePosition = new Position(mousePosition.getX() + state.lastCameraPosition.getX() , mousePosition.getY() + state.lastCameraPosition.getY());
+			state.addToGameObjects();
+			shooting = false;
+		}
+
 		renderer.render(state, graphics);
+
 		if(debugMode){
 			debugRenderer.render(state, graphics);
 		}

@@ -1,5 +1,6 @@
 package display;
 
+import entities.Entity;
 import gfx.Camera;
 import helpers.CollisionBox;
 import state.State;
@@ -10,7 +11,7 @@ public class DebugRenderer {
     public void render(State state, Graphics graphics) {
         Camera camera = state.getCamera();
         state.getGameObjects().stream()
-                .map(entity -> entity.getCollisionBox())
+                .map(Entity::getCollisionBox)
                 .forEach( collisionBox -> drawCollisionBox(collisionBox, graphics, camera) );
     }
 

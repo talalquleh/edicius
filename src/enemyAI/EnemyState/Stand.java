@@ -3,6 +3,7 @@ package enemyAI.EnemyState;
 import enemyAI.EnemyTransition;
 import entities.Enemy;
 import game.GameLoop;
+import helpers.Position;
 import state.State;
 
 public class Stand extends EnemyState {
@@ -14,7 +15,7 @@ public class Stand extends EnemyState {
     }
 
     @Override
-    public void update(State state, Enemy currentEnemy) {
+    public void update(State state, Enemy currentEnemy, Position target) {
         this.updatesGoing++;
     }
 }

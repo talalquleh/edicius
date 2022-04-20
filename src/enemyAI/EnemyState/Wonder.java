@@ -33,13 +33,13 @@ public class Wonder extends EnemyState{
     }
 
     @Override
-    public void update(State state, Enemy currentEnemy) {
+    public void update(State state, Enemy currentEnemy, Position target) {
         if(this.targets.isEmpty()){
             targets.add(state.getRandomPosition());
         }
         EnemyController controller = (EnemyController) currentEnemy.getController();
        // controller.moveToTarget(player.getPosition(), currentEnemy.getPosition(), mapCollisionBoxes, enemyCollisionBox);
-        controller.moveToTarget(player.getPosition(), currentEnemy.getPosition());
+        controller.moveToTarget(target, currentEnemy.getPosition());
 
         if(arrived(currentEnemy)){
             controller.stop();

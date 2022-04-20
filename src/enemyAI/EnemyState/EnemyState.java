@@ -2,6 +2,7 @@ package enemyAI.EnemyState;
 
 import enemyAI.EnemyTransition;
 import entities.Enemy;
+import helpers.Position;
 import state.State;
 
 public abstract class EnemyState {
@@ -13,7 +14,7 @@ public abstract class EnemyState {
     }
 
     protected abstract EnemyTransition initializeTransition();
-    public abstract void update(State state, Enemy currentEnemy);
+    public abstract void update(State state, Enemy currentEnemy, Position target);
 
     public boolean shouldTransition(State state, Enemy currentEnemy){
         return transition.shouldTransition(state, currentEnemy);
