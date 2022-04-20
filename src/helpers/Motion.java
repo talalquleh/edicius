@@ -31,7 +31,7 @@ public class Motion {
             deltaX++;
         }
         this.vector = new Vector2D(deltaX , deltaY);
-        this.vector.normlize();
+        this.vector.normalize();
         this.vector.multiply(speed);
     }
 

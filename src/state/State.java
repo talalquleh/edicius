@@ -21,7 +21,7 @@ import gfx.Camera;
 
 public class State {
 
-    protected GameMap gameMap;
+    protected  GameMap gameMap;
     protected List<Entity> gameObjects ;
     protected SpriteSheet spriteLibrary;
     protected Input input;
