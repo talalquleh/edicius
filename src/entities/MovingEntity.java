@@ -103,20 +103,20 @@ public abstract class MovingEntity extends Entity {
                 this.position.setX(this.position.getX() + speed);
                 break;
             case NE:
-                this.position.setX(this.position.getX() - speed);
-                this.position.setY(this.position.getY() + speed);
+                this.position.setX(this.position.getX() - speed / 1.4);
+                this.position.setY(this.position.getY() + speed / 1.4);
                 break;
             case NW:
-                this.position.setX(this.position.getX() + speed);
-                this.position.setY(this.position.getY() + speed);
+                this.position.setX(this.position.getX() + speed / 1.4);
+                this.position.setY(this.position.getY() + speed / 1.4);
                 break;
             case SE:
-                this.position.setX(this.position.getX() - speed);
-                this.position.setY(this.position.getY() - speed);
+                this.position.setX(this.position.getX() - speed / 1.4);
+                this.position.setY(this.position.getY() - speed / 1.4);
                 break;
             case SW:
-                this.position.setX(this.position.getX() + speed);
-                this.position.setY(this.position.getY() - speed);
+                this.position.setX(this.position.getX() + speed / 1.4);
+                this.position.setY(this.position.getY() - speed / 1.4);
                 break;
             default:
 
