@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"controller"},{"l":"display"},{"l":"entities"},{"l":"entities.creatures"},{"l":"game"},{"l":"gfx"},{"l":"helpers"},{"l":"input"},{"l":"state"},{"l":"tiles"},{"l":"worlds"}]
