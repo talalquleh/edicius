@@ -1,5 +1,7 @@
 package helpers;
 
+import java.util.*;
+
 public class Vector2D {
     private double x;
     private double y;
@@ -43,6 +45,25 @@ public class Vector2D {
     public static double getDistance(Vector2D tile, Vector2D goal) {
         return Math.sqrt(Math.pow(tile.getX() - goal.getX(), 2) + Math.pow(tile.getY() - goal.getY(), 2));
     }
+    public static double getManhattanDistance(Vector2D tile, Vector2D goal)
+    {
+        return Math.abs(tile.getX() - goal.getX()) + Math.abs(tile.getY() - goal.getY());
+    }
+
+    public List<Vector2D> getNeighbors(int maxx, int maxy)
+    {
+        List<Vector2D> l = new ArrayList<>();
+        if (x != 0) l.add(new Vector2D(x-1, y));
+        if (x != maxx-1) l.add(new Vector2D(x+1, y));
+        if (y != 0) l.add(new Vector2D(x, y-1));
+        if (y != maxy-1) l.add(new Vector2D(x, y+1));
+
+        if (x != 0 && y != 0) l.add(new Vector2D(x-1, y-1));
+        if (x != maxx-1 && y != maxy-1) l.add(new Vector2D(x+1, y+1));
+        if (x != 0 && y != maxy-1) l.add(new Vector2D(x-1, y+1));
+        if (x != maxx-1 && y != 0) l.add(new Vector2D(x+1, y-1));
+        return l;
+    }
 
     /**
      * To separates the direction from the magnitude!
@@ -61,3 +82,4 @@ public class Vector2D {
         }
     }
 }
+

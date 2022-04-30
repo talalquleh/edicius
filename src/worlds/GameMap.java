@@ -100,5 +100,7 @@ public class GameMap {
     public int[][] getMaps(String name) {
         return this.maps.get(name);
     }
-
+    public int[][] getTilesValues(){
+        return maps.get("map1.txt");
+    }
 }

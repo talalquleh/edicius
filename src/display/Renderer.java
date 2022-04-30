@@ -21,13 +21,13 @@ import javax.imageio.ImageIO;
 
 public class Renderer {
 
-    public Rectangle entityToPixel(Position pos, Size s) {
+    public static Rectangle entityToPixel(Position pos, Size s) {
         return new Rectangle(pos.intX() - (int) s.getWidth() / 2,
                 pos.intY() - (int) s.getHeight() / 2,
                 (int) s.getWidth(), (int) s.getHeight());
     }
 
-    public Rectangle entityToTile(Rectangle r) {
+    public static Rectangle entityToTile(Rectangle r) {
         return new Rectangle(r.x / Game.SPRITE_SIZE, r.y / Game.SPRITE_SIZE,
                 (r.x + r.width) / Game.SPRITE_SIZE - r.x / Game.SPRITE_SIZE + 1,
                 (r.y + r.height) / Game.SPRITE_SIZE - r.y / Game.SPRITE_SIZE + 1);
