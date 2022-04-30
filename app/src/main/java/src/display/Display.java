@@ -7,7 +7,6 @@ import java.awt.image.BufferStrategy;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Currency;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -99,47 +98,43 @@ public class Display extends JFrame {
 		Graphics graphics = bufferStartegy.getDrawGraphics();
 
 
+		// player shooting
 		if(shooting){
-			mousePosition = new Position(mousePosition.getX() + state.lastCameraPosition.getX() , mousePosition.getY() + state.lastCameraPosition.getY());
+			mousePosition = new Position(mousePosition.getX() + state.lastCameraPosition.getX(), 
+				mousePosition.getY() + state.lastCameraPosition.getY());
 			state.addToGameObjects();
 			shooting = false;
 		}
 
+		// enemy shooting 
 		long currentTime = System.currentTimeMillis() / 1000;
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run(){
 				// System.out.println(currentTime);
 				
-				// ArrayList<Enemy> newShots = new ArrayList<>();
-				if(currentTime%1000==0 && timeout){
-					System.out.println("fire");
-					timeout = false;
+				ArrayList<Enemy> newShots = new ArrayList<>();
+				if(currentTime % 1000 == 0){
+					for (Entity nextElem : state.getGameObjects()) {
+						if (nextElem instanceof Enemy) {
+							Enemy en = (Enemy) nextElem;
+							if(inRange(state.getPlayer(), en)){
+								newShots.add(en);
+							}
+						}
+					}
+					for (Enemy enemy : newShots) {
+						state.addEnemyShotsGameObjects(enemy);
+					}
 				}
-				// for (Entity nextElem : state.getGameObjects()) {
-				// 	if (nextElem instanceof Enemy) {
-				// 		Enemy en = (Enemy) nextElem;
-				// 		if(inRange(state.getPlayer(), en)){
-				// 			newShots.add(en);
-				// 			//Game.log("in range");
-				// 		}
-				// 	}
-				// }
-				// for (Enemy enemy : newShots) {
-				// 	state.addEnemyShotsGameObjects(enemy);
-				// }
-			// 	synchronized(state.getGameObjects()){
-			// 	}
 			}
 		});
-		// System.out.println(currentTime);
-		// if(System.currentTimeMillis() / 1000 ==  currentTime + 5) t.start();
-		//t.start();
-		// try {
-		// 	t.join();
-		// } catch (InterruptedException e) {
-		// 	e.printStackTrace();
-		// }
+		t.start();
+		 try {
+			t.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
 		
 		renderer.render(state, graphics);
@@ -152,6 +147,18 @@ public class Display extends JFrame {
 		graphics.dispose();
 		bufferStartegy.show(); // here the displaying of the whole graphics is happening
 
+	}
+
+	public boolean inRange(Player player, Enemy enemy){
+		CollisionBox collisionBox = new CollisionBox(
+			new java.awt.Rectangle(
+				(int) enemy.getPosition().getX(),
+				(int) enemy.getPosition().getY(),
+				(int) enemy.getPosition().getX() + Game.SPRITE_SIZE * 3 - Game.SPRITE_SIZE * 2,
+				(int) enemy.getPosition().getY() + Game.SPRITE_SIZE * 3 - Game.SPRITE_SIZE * 2
+			)
+		);
+		return player.getCollisionBox().collidesWith(collisionBox);
 	}
 
 }

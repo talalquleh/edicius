@@ -5,9 +5,7 @@ import java.util.ArrayList;
 
 import src.entities.Enemy;
 import src.entities.Entity;
-import src.entities.Player;
 import src.game.Game;
-import src.helpers.CollisionBox;
 import src.helpers.Position;
 import src.helpers.Size;
 import src.state.State;
@@ -83,19 +81,19 @@ public class Renderer {
 				if (shot.isTimeToRemoveShot()) {
 					state.getGameObjects().remove(nextElem);
 				}
-				if(!shot.isShot()){
-					if(inRange(state.getPlayer(), shot)){
-						shot.killPlayer();
-					}
-				}
-				for (Entity entity : changedEntities) {
-					if (entity instanceof Enemy) {
-						Enemy enemy = (Enemy) nextElem;
-						if(shot.isShot() && shot.getCollisionBox().collidesWith(enemy.getCollisionBox())){
-							state.getGameObjects().remove(enemy);
-						}
-					}
-				}
+				// if(!shot.isShot()){
+				// 	if(inRange(state.getPlayer(), shot)){
+				// 		shot.killPlayer();
+				// 	}
+				// }
+				// for (Entity entity : changedEntities) {
+				// 	if (entity instanceof Enemy) {
+				// 		Enemy enemy = (Enemy) nextElem;
+				// 		if(shot.isShot() && shot.getCollisionBox().collidesWith(enemy.getCollisionBox())){
+				// 			state.getGameObjects().remove(enemy);
+				// 		}
+				// 	}
+				// }
 
 			}
 		}
@@ -126,15 +124,4 @@ public class Renderer {
 		}
 	}
 	
-	public boolean inRange(Player player, Enemy enemy){
-		CollisionBox collisionBox = new CollisionBox(
-			new java.awt.Rectangle(
-				(int) enemy.getPosition().getX(),
-				(int) enemy.getPosition().getY(),
-				(int) enemy.getPosition().getX() + Game.SPRITE_SIZE * 3 - Game.SPRITE_SIZE * 2,
-				(int) enemy.getPosition().getY() + Game.SPRITE_SIZE * 3 - Game.SPRITE_SIZE * 2
-			)
-		);
-		return player.getCollisionBox().collidesWith(collisionBox);
-	}
 }
