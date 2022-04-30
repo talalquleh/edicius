@@ -11,6 +11,7 @@ import src.worlds.GameMap;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import src.gfx.Camera;
 
@@ -28,7 +29,7 @@ public class State {
 
     public State(Size windowSize, Input input) {
         this.input = input;
-        gameObjects = new ArrayList<>();
+        gameObjects = new CopyOnWriteArrayList<>();
         spriteLibrary = new SpriteSheet();
         gameMap = new GameMap(new Size(50, 50), spriteLibrary);
         camera = new Camera(windowSize);
@@ -45,6 +46,7 @@ public class State {
      */
     public void update(){
         sortObjectsByPosition();
+        //List<Entity> copyGameObjects = new ArrayList<>(gameObjects);
         gameObjects.forEach(gameObject -> gameObject.update(this));
         camera.update(this);
     }

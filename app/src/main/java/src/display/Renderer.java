@@ -44,28 +44,26 @@ public class Renderer {
 
 		java.util.List<Entity> changedEntities = new ArrayList<>();
 		java.util.List<Rectangle> changedRects = new ArrayList<>();
-		for (int i = 0; i < state.getGameObjects().size(); i++) {
-			for (Entity gameObject : state.getGameObjects()) {
-				Rectangle initRect = entityToTile(entityToPixel(gameObject.getPosition(), gameObject.getSize()));
-				final Rectangle rect;
+		for (Entity gameObject : state.getGameObjects()) {
+			Rectangle initRect = entityToTile(entityToPixel(gameObject.getPosition(), gameObject.getSize()));
+			final Rectangle rect;
 
-				if (!state.lastEntityPositions.containsKey(gameObject)) {
-					rect = initRect;
-				}
-				else{
-					rect = initRect.union(entityToTile(entityToPixel(state.lastEntityPositions.get(gameObject), gameObject.getSize())));
-				}
-				if (state.lastEntityPositions.containsKey(gameObject) && state.lastEntityPositions.get(gameObject) == gameObject.getPosition()) {
-					if (changedRects.stream().noneMatch(rect::intersects)) continue;
-				}
-				if (!renderedFullMap){
-					renderMap(state, graphics, rect.x, rect.y, rect.x + rect.width, rect.y + rect.height);
-				}
-				state.lastEntityPositions.put(gameObject, new Position(gameObject.getPosition().getX(), gameObject.getPosition().getY()));
-
-				changedEntities.add(gameObject);
-				changedRects.add(rect);
+			if (!state.lastEntityPositions.containsKey(gameObject)) {
+				rect = initRect;
 			}
+			else{
+				rect = initRect.union(entityToTile(entityToPixel(state.lastEntityPositions.get(gameObject), gameObject.getSize())));
+			}
+			if (state.lastEntityPositions.containsKey(gameObject) && state.lastEntityPositions.get(gameObject) == gameObject.getPosition()) {
+				if (changedRects.stream().noneMatch(rect::intersects)) continue;
+			}
+			if (!renderedFullMap){
+				renderMap(state, graphics, rect.x, rect.y, rect.x + rect.width, rect.y + rect.height);
+			}
+			state.lastEntityPositions.put(gameObject, new Position(gameObject.getPosition().getX(), gameObject.getPosition().getY()));
+
+			changedEntities.add(gameObject);
+			changedRects.add(rect);
 		}
 		for (Entity gameObject: changedEntities) {
 			graphics.drawImage(

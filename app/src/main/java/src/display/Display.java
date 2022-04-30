@@ -105,37 +105,6 @@ public class Display extends JFrame {
 			state.addToGameObjects();
 			shooting = false;
 		}
-
-		// enemy shooting 
-		long currentTime = System.currentTimeMillis() / 1000;
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run(){
-				// System.out.println(currentTime);
-				
-				ArrayList<Enemy> newShots = new ArrayList<>();
-				if(currentTime % 1000 == 0){
-					for (Entity nextElem : state.getGameObjects()) {
-						if (nextElem instanceof Enemy) {
-							Enemy en = (Enemy) nextElem;
-							if(inRange(state.getPlayer(), en)){
-								newShots.add(en);
-							}
-						}
-					}
-					for (Enemy enemy : newShots) {
-						state.addEnemyShotsGameObjects(enemy);
-					}
-				}
-			}
-		});
-		t.start();
-		 try {
-			t.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
 		
 		renderer.render(state, graphics);
 
@@ -149,7 +118,7 @@ public class Display extends JFrame {
 
 	}
 
-	public boolean inRange(Player player, Enemy enemy){
+	public static  boolean inRange(Player player, Enemy enemy){
 		CollisionBox collisionBox = new CollisionBox(
 			new java.awt.Rectangle(
 				(int) enemy.getPosition().getX(),

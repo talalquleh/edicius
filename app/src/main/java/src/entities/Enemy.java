@@ -7,6 +7,7 @@ import src.gfx.SpriteSheet;
 import src.helpers.CollisionBox;
 import src.helpers.Position;
 import src.state.State;
+import static src.display.Display.inRange;
 
 import java.awt.*;
 
@@ -18,6 +19,7 @@ public class Enemy extends MovingEntity {
     private Position target;
     private boolean timeToRemoveShot;
     private SpriteSheet changeSpriteLibrary;
+    private long lastShootingTime = 0;
     /**
      * Initilize all the components that are going to be used to update an entity!
      *
@@ -86,6 +88,11 @@ public class Enemy extends MovingEntity {
     @Override
     public void update(State state){
         super.update(state);
+        long milliseconds = System.currentTimeMillis();
+        if (lastShootingTime + 1000 < milliseconds && !isShot() && inRange(state.getPlayer(), this)) {
+            lastShootingTime = milliseconds;
+            state.addEnemyShotsGameObjects(this);
+        }
         if(isShot) {
             double deltaX = target.getX() - this.position.getX() ;
             double deltaY = target.getY() - this.position.getY();
