@@ -17,6 +17,7 @@ public class Enemy extends MovingEntity {
     private boolean isShot;
     private String belongsTo;
     private Position target;
+    private Position delta;
     private boolean timeToRemoveShot;
     private SpriteSheet changeSpriteLibrary;
     private long lastShootingTime = 0;
@@ -33,6 +34,7 @@ public class Enemy extends MovingEntity {
         brain = new Brain();
         this.isShot = false;
         this.target = new Position(0,0);
+        this.delta = new Position(0,0);
         timeToRemoveShot  = false;
         changeSpriteLibrary = spriteLibrary;
     }
@@ -83,6 +85,9 @@ public class Enemy extends MovingEntity {
 
     public void setTarget(Position position){
         this.target = position;
+        this.delta = 
+            new Position((position.getX() - this.position.getX()) * 0.05,
+                    (position.getY() - this.position.getY()) * 0.05);
     }
 
     @Override
@@ -94,10 +99,8 @@ public class Enemy extends MovingEntity {
             state.addEnemyShotsGameObjects(this);
         }
         if(isShot) {
-            double deltaX = target.getX() - this.position.getX() ;
-            double deltaY = target.getY() - this.position.getY();
-            double x = this.position.getX() + deltaX * 0.05;
-            double y = this.position.getY() + deltaY * 0.05;
+            double x = this.position.getX() + delta.getX();
+            double y = this.position.getY() + delta.getY();
             this.position = new Position( x, y);
             if (this.getCollisionBox().collidesWith(new CollisionBox
                 (
