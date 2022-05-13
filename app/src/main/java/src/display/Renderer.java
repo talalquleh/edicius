@@ -11,6 +11,8 @@ import src.helpers.Size;
 import src.state.State;
 import src.tiles.Tile;
 import src.gfx.Camera;
+import src.helpers.buttons.MusicButton;
+import src.helpers.buttons.PauseButton;
 
 
 public class Renderer {
@@ -83,6 +85,59 @@ public class Renderer {
 				}
 			}
 		}
+		//in case player dead
+
+        //progress bars and button
+        //music button
+        graphics.setColor(new Color(40, 41, 60));
+        graphics.fillRect(700 - 120, 5, 300, 40); //for health bar
+        graphics.fillRect(MusicButton.instance.x, MusicButton.instance.y, MusicButton.instance.width, MusicButton.instance.height);
+        graphics.setColor(Color.white);
+        //pause button
+        graphics.setColor(new Color(40, 41, 60));
+        graphics.fillRect(PauseButton.instance.x, PauseButton.instance.y, PauseButton.instance.width, PauseButton.instance.height);
+        graphics.setColor(Color.white);
+        //health bar
+        graphics.drawString("Heath: " + state.getPlayer().getHealth() + " HP", 700 - 120, 25);
+        graphics.drawString(MusicButton.instance.btn_text, MusicButton.instance.x + 10, MusicButton.instance.y + 20); //for music
+        graphics.drawString(PauseButton.instance.btn_text, PauseButton.instance.x + 10, PauseButton.instance.y + 20); //for pausing
+        //when pausing draw string
+        if (PauseButton.instance.isPaused) {
+            graphics.setColor(Color.red);
+            graphics.setFont(new Font("Monospaced", Font.BOLD, 75));
+            FontMetrics metrics3 = graphics.getFontMetrics(graphics.getFont());
+            graphics.drawString("Paused", (700 - metrics3.stringWidth("Paused")) / 2, 700 / 2);
+            graphics.setFont(new Font("Ink Free", Font.BOLD, 20));
+            FontMetrics metrics2 = graphics.getFontMetrics(graphics.getFont());
+//            graphics.drawString("Time: " + PauseButton.instance.elapsedTimeInSeconds, (700- metrics2.stringWidth("Time: " + PauseButton.instance.elapsedTimeInSeconds)) / 2, 700- graphics.getFont().getSize());//draw time
+            graphics.drawString("killed: " + state.getPlayer().getKilledCnt(), (700 - metrics2.stringWidth("killed: " + state.getPlayer().getKilledCnt())), 700 - graphics.getFont().getSize());//draw killed enemies
+
+        } //progress bars and button
+        //music button
+        graphics.setColor(new Color(40, 41, 60));
+        graphics.fillRect(700 - 120, 5, 300, 40); //for health bar
+        graphics.fillRect(MusicButton.instance.x, MusicButton.instance.y, MusicButton.instance.width, MusicButton.instance.height);
+        graphics.setColor(Color.white);
+        //pause button
+        graphics.setColor(new Color(40, 41, 60));
+        graphics.fillRect(PauseButton.instance.x, PauseButton.instance.y, PauseButton.instance.width, PauseButton.instance.height);
+        graphics.setColor(Color.white);
+        //health bar
+        graphics.drawString("Heath: " + state.getPlayer().getHealth() + " HP", 700 - 120, 25);
+        graphics.drawString(MusicButton.instance.btn_text, MusicButton.instance.x + 10, MusicButton.instance.y + 20); //for music
+        graphics.drawString(PauseButton.instance.btn_text, PauseButton.instance.x + 10, PauseButton.instance.y + 20); //for pausing
+        //when pausing draw string
+        if (PauseButton.instance.isPaused) {
+            graphics.setColor(Color.red);
+            graphics.setFont(new Font("Monospaced", Font.BOLD, 75));
+            FontMetrics metrics3 = graphics.getFontMetrics(graphics.getFont());
+            graphics.drawString("Paused", (700 - metrics3.stringWidth("Paused")) / 2, 700 / 2);
+            graphics.setFont(new Font("Ink Free", Font.BOLD, 20));
+            FontMetrics metrics2 = graphics.getFontMetrics(graphics.getFont());
+//            graphics.drawString("Time: " + PauseButton.instance.elapsedTimeInSeconds, (700- metrics2.stringWidth("Time: " + PauseButton.instance.elapsedTimeInSeconds)) / 2, 700- graphics.getFont().getSize());//draw time
+            graphics.drawString("killed: " + state.getPlayer().getKilledCnt(), (700 - metrics2.stringWidth("killed: " + state.getPlayer().getKilledCnt())), 700 - graphics.getFont().getSize());//draw killed enemies
+
+        }
 
 	}
 

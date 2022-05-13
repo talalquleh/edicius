@@ -12,7 +12,7 @@ public class GameLoop implements Runnable{
     private MyTimerTask myTimerTask;
     private long nextStatTime;
     private int fps, ups;
-
+    public static int killedEnemiesCnt=0;
     public GameLoop(Game game){
         this.game = game;
         this.myTimerTask = new MyTimerTask(this);
