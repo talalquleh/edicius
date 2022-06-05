@@ -21,6 +21,9 @@ public class Enemy extends MovingEntity {
     private boolean timeToRemoveShot;
     private SpriteSheet changeSpriteLibrary;
     private long lastShootingTime = 0;
+
+    private boolean isEnemyShot;
+    private int healthPoints;
     /**
      * Initilize all the components that are going to be used to update an entity!
      *
@@ -37,6 +40,8 @@ public class Enemy extends MovingEntity {
         this.delta = new Position(0,0);
         timeToRemoveShot  = false;
         changeSpriteLibrary = spriteLibrary;
+        isEnemyShot = false;
+        healthPoints = 6;
     }
 
     public void isShot(SpriteSheet spriteLibrary){
@@ -58,6 +63,22 @@ public class Enemy extends MovingEntity {
 
     public void setBelongsTo(String belongsTo) {
         this.belongsTo = belongsTo;
+    }
+
+    public void setIsEnemyShot(boolean b){
+        this.isEnemyShot = b;
+    }
+
+    public int getHealthPoints(){
+        return this.healthPoints;
+    }
+
+    public void reduceHealthPoints(){
+        this.healthPoints -= 1;
+    }
+
+    public boolean isShotFromEnemy(){
+        return this.isEnemyShot;
     }
 
     @Override
@@ -85,9 +106,7 @@ public class Enemy extends MovingEntity {
 
     public void setTarget(Position position){
         this.target = position;
-        this.delta = 
-            new Position((position.getX() - this.position.getX()) * 0.05,
-                    (position.getY() - this.position.getY()) * 0.05);
+        this.delta =  new Position((position.getX() - this.position.getX()) * 0.03 , (position.getY() - this.position.getY()) * 0.03);
     }
 
     @Override

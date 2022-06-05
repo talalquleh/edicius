@@ -76,26 +76,32 @@ public class Renderer {
 		for (Entity nextElem : changedEntities) {
 			if (nextElem instanceof Enemy) {
 				Enemy shot = (Enemy) nextElem;
-				if (shot.isTimeToRemoveShot()) {
-					state.getGameObjects().remove(nextElem);
+				if (shot.isShot()){
+					if (shot.isTimeToRemoveShot()) {
+						state.getGameObjects().remove(nextElem);
+					}
+	
+					if (shot.isShotFromEnemy() && shot.collidingWith(state.getPlayer())){
+						if(state.getPlayer().getHealthPoints() == 0)
+							state.getGameObjects().remove(state.getPlayer()); // game over
+						else 
+							state.getPlayer().reduceHealthPoints();
+					}
+	
+					// for (Entity entity : changedEntities) {
+					// 	if (entity instanceof Enemy) {
+					// 		Enemy enemy = (Enemy) entity; 
+					// 		if(!shot.isShotFromEnemy() && shot.collidingWith(enemy)){
+					// 			if(enemy.getHealthPoints() == 0)
+					// 				state.getGameObjects().remove(enemy);
+					// 			else 
+					// 				enemy.reduceHealthPoints();
+					// 		}	
+					// 	}
+					// }
 				}
-				// if(!shot.isShot()){
-				// 	if(inRange(state.getPlayer(), shot)){
-				// 		shot.killPlayer();
-				// 	}
-				// }
-				// for (Entity entity : changedEntities) {
-				// 	if (entity instanceof Enemy) {
-				// 		Enemy enemy = (Enemy) nextElem;
-				// 		if(shot.isShot() && shot.getCollisionBox().collidesWith(enemy.getCollisionBox())){
-				// 			state.getGameObjects().remove(enemy);
-				// 		}
-				// 	}
-				// }
-
 			}
 		}
-
 	}
 
 	/**

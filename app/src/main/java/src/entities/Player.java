@@ -7,6 +7,8 @@ import src.helpers.CollisionBox;
 
 public class Player extends MovingEntity {
 
+	private int healthPoints = 1000;
+
 	/**
 	 * Takes a Controller and a SpriteSheet that are going to identify all the components of the player!
 	 *
@@ -28,5 +30,13 @@ public class Player extends MovingEntity {
 				handleWallCollision(this.motion.getSpeed());
 			}
 		}
+	}
+
+	public int getHealthPoints(){
+		return healthPoints;
+	}
+
+	public void reduceHealthPoints(){
+		this.healthPoints -= 1;
 	}
 }

@@ -6,13 +6,10 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
 import src.entities.Enemy;
-import src.entities.Entity;
 import src.entities.Player;
 import src.game.Game;
 import src.helpers.CollisionBox;
@@ -52,14 +49,14 @@ public class Display extends JFrame {
 		canvas.setPreferredSize(new Dimension(width, height));
 		canvas.setFocusable(false);
 		add(canvas);
-
-		try {
-			Image customImage = ImageIO.read(new File("./cursor.png"));
-			Cursor customCursor = Toolkit.getDefaultToolkit().createCustomCursor(customImage, new Point(0, 0), "customCursor");
-			this.setCursor(customCursor);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			Image customImage;
+			try {
+				customImage = ImageIO.read(new File("../../../../resources/cursor.png"));
+				Cursor customCursor = Toolkit.getDefaultToolkit().createCustomCursor(customImage, new Point(0, 0), "customCursor");
+				this.setCursor(customCursor);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 
 		canvas.addMouseListener(new MouseListener() {
 
