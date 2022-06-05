@@ -52,7 +52,7 @@ public class Node {
         mapToNode.put(start, current);
         openList.add(current);
         int[][] tiles = state.getGameMap().getTilesValues();
-        System.out.println("searching for a path from " + start + " to " + goal);
+        //System.out.println("searching for a path from " + start + " to " + goal);
         while (openList.size() > 0) {
             //sort tiles from closest to further
             current = Collections.min(openList, sortNodes);

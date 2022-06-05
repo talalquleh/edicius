@@ -24,7 +24,8 @@ public class GameState extends State{
         gameMap = new GameMap(new Size(20,20), spriteLibrary);
         player = new Player(new PlayerController(input) , spriteLibrary);
         enemies = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        final int enemyCount = 10;
+        for (int i = 0; i < enemyCount; i++) {
             Enemy enemy = new Enemy(new EnemyController(), spriteLibrary);
             enemies.add(enemy);
         }
@@ -48,8 +49,8 @@ public class GameState extends State{
         for (Enemy enemy: enemies) {
             Point randomPosition = possiblePosition.get(r.nextInt(possiblePosition.size()));
             enemy.setPosition( new Position(
-                    randomPosition.x * Game.SPRITE_SIZE  - state.getCamera().getPosition().intX(),
-                    randomPosition.y * Game.SPRITE_SIZE - state.getCamera().getPosition().intY())
+                    randomPosition.x * Game.SPRITE_SIZE + Game.SPRITE_SIZE/2,
+                    randomPosition.y * Game.SPRITE_SIZE + Game.SPRITE_SIZE/2)
             );
         }
     }
