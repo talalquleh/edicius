@@ -88,17 +88,17 @@ public class Renderer {
 							state.getPlayer().reduceHealthPoints();
 					}
 	
-					// for (Entity entity : changedEntities) {
-					// 	if (entity instanceof Enemy) {
-					// 		Enemy enemy = (Enemy) entity; 
-					// 		if(!shot.isShotFromEnemy() && shot.collidingWith(enemy)){
-					// 			if(enemy.getHealthPoints() == 0)
-					// 				state.getGameObjects().remove(enemy);
-					// 			else 
-					// 				enemy.reduceHealthPoints();
-					// 		}	
-					// 	}
-					// }
+					 for (Entity entity : changedEntities) {
+					 	if (entity instanceof Enemy) {
+					 		Enemy enemy = (Enemy) entity; 
+					 		if(!enemy.isShot() && !shot.isShotFromEnemy() && shot.collidingWith(enemy)){
+					 			if(enemy.getHealthPoints() == 0)
+					 				state.getGameObjects().remove(enemy);
+					 			else 
+					 				enemy.reduceHealthPoints();
+					 		}	
+					 	}
+					 }
 				}
 			}
 		}
