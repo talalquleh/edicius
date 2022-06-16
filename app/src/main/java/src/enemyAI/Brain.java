@@ -8,19 +8,18 @@ import src.helpers.CollisionBox;
 import src.helpers.Position;
 import src.state.State;
 
-import java.util.List;
 
 public class Brain {
     private EnemyState currentState;
-    private List<CollisionBox> mapCollisionBoxes;
-    private CollisionBox EnemyCollisionBox;
-    private boolean isShot;
+    // private List<CollisionBox> mapCollisionBoxes;
+    // private CollisionBox EnemyCollisionBox;
+    // private boolean isShot;
 //List<CollisionBox> mapCollisionBoxes, CollisionBox collisionBox
     public Brain() {
         transitionTo("stand");
 //        this.EnemyCollisionBox = collisionBox;
 //        this.mapCollisionBoxes = mapCollisionBoxes;
-        this.isShot = false;
+        // this.isShot = false;
     }
 
 

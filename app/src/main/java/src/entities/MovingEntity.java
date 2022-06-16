@@ -11,7 +11,6 @@ import src.state.State;
 import src.gfx.Animation;
 import src.gfx.SpriteSheet;
 
-import java.util.Iterator;
 import java.util.List;
 
 public abstract class MovingEntity extends Entity {
@@ -34,7 +33,7 @@ public abstract class MovingEntity extends Entity {
         this.motion = new Motion(2);
         this.animation = new Animation(spriteLibrary.getUnit("dave")); // from here we can change the player by entering the other player name (matt)!
         this.direction = Direction.S;
-        this.collisionBoxSize = new Size(16, 28);
+        this.collisionBoxSize = new Size(22, 35);
     }
 
     /**

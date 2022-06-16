@@ -48,8 +48,8 @@ public class GameState extends State{
         for (Enemy enemy: enemies) {
             Point randomPosition = possiblePosition.get(r.nextInt(possiblePosition.size()));
             enemy.setPosition( new Position(
-                    randomPosition.x * Game.SPRITE_SIZE  - state.getCamera().getPosition().intX(),
-                    randomPosition.y * Game.SPRITE_SIZE - state.getCamera().getPosition().intY())
+                    randomPosition.x * Game.SPRITE_SIZE - state.getCamera().getPosition().intX() - 20,
+                    randomPosition.y * Game.SPRITE_SIZE - state.getCamera().getPosition().intY() - 35)
             );
         }
     }
@@ -72,6 +72,15 @@ public class GameState extends State{
         en.isShot(spriteLibrary);
 
         gameObjects.add(en);
+    }
 
+    @Override
+    public void addEnemyShotsGameObjects(Enemy enemy){
+        Enemy en = new Enemy(new EnemyController(), spriteLibrary);
+        en.setPosition(enemy.getPosition());
+        en.setTarget(player.getPosition());
+        en.setIsEnemyShot(true);
+        en.isShot(spriteLibrary);
+        gameObjects.add(en);
     }
 }

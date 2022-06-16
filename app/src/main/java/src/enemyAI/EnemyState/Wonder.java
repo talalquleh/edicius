@@ -15,8 +15,8 @@ import java.util.List;
 public class Wonder extends EnemyState{
     private List<Position> targets;
     private Player player;
-    private List<CollisionBox> mapCollisionBoxes;
-    private CollisionBox enemyCollisionBox;
+    // private List<CollisionBox> mapCollisionBoxes;
+    // private CollisionBox enemyCollisionBox;
 
     //public Wonder(List<CollisionBox> mapCollisionBoxes, CollisionBox enemyCollisionBox)
     public Wonder() {

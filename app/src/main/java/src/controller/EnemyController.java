@@ -4,7 +4,6 @@ import src.helpers.CollisionBox;
 import src.helpers.Position;
 
 import java.awt.*;
-import java.util.List;
 import java.util.Map;
 
 public class EnemyController implements Controller{

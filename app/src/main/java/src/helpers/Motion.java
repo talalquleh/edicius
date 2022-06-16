@@ -2,22 +2,19 @@ package src.helpers;
 
 import src.controller.Controller;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Motion {
     private Vector2D vector;
     List<Vector2D> shotsVector;
     private double speed;
-    private Map<Boolean, Point> playerShots;
+    // private Map<Boolean, Point> playerShots;
 
     public Motion(double speed) {
         this.vector = new Vector2D(0,0);
         this.speed = speed;
-        playerShots = new HashMap<>();
+        // playerShots = new HashMap<>();
         shotsVector = new ArrayList<>();
     }
 
@@ -27,7 +24,7 @@ public class Motion {
      */
     public void update(Controller controller ) {
         int deltaX = 0 , deltaY = 0;
-        playerShots = controller.isMouseClicked();
+        // playerShots = controller.isMouseClicked();
 
         if(controller.isRequestingUp()) {
             deltaY--;
