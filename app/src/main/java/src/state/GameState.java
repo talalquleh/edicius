@@ -73,6 +73,15 @@ public class GameState extends State{
         en.isShot(spriteLibrary);
 
         gameObjects.add(en);
+    }
 
+    @Override
+    public void addEnemyShotsGameObjects(Enemy enemy){
+        Enemy en = new Enemy(new EnemyController(), spriteLibrary);
+        en.setPosition(enemy.getPosition());
+        en.setTarget(player.getPosition());
+        en.setIsEnemyShot(true);
+        en.isShot(spriteLibrary);
+        gameObjects.add(en);
     }
 }

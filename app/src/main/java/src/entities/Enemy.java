@@ -1,6 +1,7 @@
 package src.entities;
 
 import src.controller.Controller;
+import src.enemyAI.Brain;
 import src.display.Display;
 import src.enemyAI.Brain;
 import src.game.Game;
@@ -9,6 +10,8 @@ import src.gfx.SpriteSheet;
 import src.helpers.CollisionBox;
 import src.helpers.Position;
 import src.state.State;
+import static src.display.Display.inRange;
+
 
 import java.awt.*;
 
@@ -18,7 +21,13 @@ public class Enemy extends MovingEntity {
     private boolean isShot;
     private String belongsTo;
     private Position target;
+    private Position delta;
     private boolean timeToRemoveShot;
+    private SpriteSheet changeSpriteLibrary;
+    private long lastShootingTime = 0;
+
+    private boolean isEnemyShot;
+    private int healthPoints;
     /**
      * Initilize all the components that are going to be used to update an entity!
      *
@@ -32,12 +41,20 @@ public class Enemy extends MovingEntity {
         brain = new Brain();
         this.isShot = false;
         this.target = new Position(0,0);
+        this.delta = new Position(0,0);
         timeToRemoveShot  = false;
+        changeSpriteLibrary = spriteLibrary;
+        isEnemyShot = false;
+        healthPoints = 6;
     }
 
     public void isShot(SpriteSheet spriteLibrary){
         this.animation = new Animation(spriteLibrary.getUnit("shot"));
         this.isShot = true;
+    }
+
+    public void killPlayer(){
+        this.animation = new Animation(this.changeSpriteLibrary.getUnit("shot"));
     }
 
     public boolean isShot() {
@@ -52,6 +69,22 @@ public class Enemy extends MovingEntity {
         this.belongsTo = belongsTo;
     }
 
+    public void setIsEnemyShot(boolean b){
+        this.isEnemyShot = b;
+    }
+
+    public int getHealthPoints(){
+        return this.healthPoints;
+    }
+
+    public void reduceHealthPoints(){
+        this.healthPoints -= 1;
+    }
+
+    public boolean isShotFromEnemy(){
+        return this.isEnemyShot;
+    }
+
     @Override
     protected void handleCollision(Entity other) {
         for (CollisionBox box: getMapCollisionBoxes() ) {
@@ -63,6 +96,11 @@ public class Enemy extends MovingEntity {
                 }
             }
         }
+        // if(other instanceof Enemy && this.isShot){
+        //     if(((Enemy) other).getCollisionBox().collidesWith(this.getCollisionBox())){
+        //         timeToRemoveShot = true;
+        //     }
+        // }
 
     }
 
@@ -72,18 +110,26 @@ public class Enemy extends MovingEntity {
 
     public void setTarget(Position position){
         this.target = position;
+        this.delta =  new Position((position.getX() - this.position.getX()) * 0.03 , (position.getY() - this.position.getY()) * 0.03);
     }
 
     @Override
     public void update(State state){
         super.update(state);
+        long milliseconds = System.currentTimeMillis();
+        if (lastShootingTime + 1000 < milliseconds && !isShot() && inRange(state.getPlayer(), this)) {
+            lastShootingTime = milliseconds;
+            state.addEnemyShotsGameObjects(this);
+        }
         if(isShot) {
-            double deltaX = target.getX() - this.position.getX() ;
-            double deltaY = target.getY() - this.position.getY();
-            double x = this.position.getX() + deltaX * 0.05;
-            double y = this.position.getY() + deltaY * 0.05;
+            double x = this.position.getX() + delta.getX();
+            double y = this.position.getY() + delta.getY();
             this.position = new Position( x, y);
-            if (this.getCollisionBox().collidesWith(new CollisionBox(new Rectangle(target.intX(), target.intY(), 15, 15)))){
+            if (this.getCollisionBox().collidesWith(new CollisionBox
+                (
+                new Rectangle(target.intX(), target.intY(), 15, 15)
+                )
+            )){
                 this.timeToRemoveShot = true;
             }
         }else{

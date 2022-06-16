@@ -46,28 +46,26 @@ public class Renderer {
 
 		java.util.List<Entity> changedEntities = new ArrayList<>();
 		java.util.List<Rectangle> changedRects = new ArrayList<>();
-		for (int i = 0; i < state.getGameObjects().size(); i++) {
-			for (Entity gameObject : state.getGameObjects()) {
-				Rectangle initRect = entityToTile(entityToPixel(gameObject.getPosition(), gameObject.getSize()));
-				final Rectangle rect;
+		for (Entity gameObject : state.getGameObjects()) {
+			Rectangle initRect = entityToTile(entityToPixel(gameObject.getPosition(), gameObject.getSize()));
+			final Rectangle rect;
 
-				if (!state.lastEntityPositions.containsKey(gameObject)) {
-					rect = initRect;
-				}
-				else{
-					rect = initRect.union(entityToTile(entityToPixel(state.lastEntityPositions.get(gameObject), gameObject.getSize())));
-				}
-				if (state.lastEntityPositions.containsKey(gameObject) && state.lastEntityPositions.get(gameObject) == gameObject.getPosition()) {
-					if (changedRects.stream().noneMatch(rect::intersects)) continue;
-				}
-				if (!renderedFullMap){
-					renderMap(state, graphics, rect.x, rect.y, rect.x + rect.width, rect.y + rect.height);
-				}
-				state.lastEntityPositions.put(gameObject, new Position(gameObject.getPosition().getX(), gameObject.getPosition().getY()));
-
-				changedEntities.add(gameObject);
-				changedRects.add(rect);
+			if (!state.lastEntityPositions.containsKey(gameObject)) {
+				rect = initRect;
 			}
+			else{
+				rect = initRect.union(entityToTile(entityToPixel(state.lastEntityPositions.get(gameObject), gameObject.getSize())));
+			}
+			if (state.lastEntityPositions.containsKey(gameObject) && state.lastEntityPositions.get(gameObject) == gameObject.getPosition()) {
+				if (changedRects.stream().noneMatch(rect::intersects)) continue;
+			}
+			if (!renderedFullMap){
+				renderMap(state, graphics, rect.x, rect.y, rect.x + rect.width, rect.y + rect.height);
+			}
+			state.lastEntityPositions.put(gameObject, new Position(gameObject.getPosition().getX(), gameObject.getPosition().getY()));
+
+			changedEntities.add(gameObject);
+			changedRects.add(rect);
 		}
 		for (Entity gameObject: changedEntities) {
 			graphics.drawImage(
@@ -79,9 +77,30 @@ public class Renderer {
 		}
 		for (Entity nextElem : changedEntities) {
 			if (nextElem instanceof Enemy) {
-				Enemy en = (Enemy) nextElem;
-				if (en.isTimeToRemoveShot()) {
-					state.getGameObjects().remove(nextElem);
+				Enemy shot = (Enemy) nextElem;
+				if (shot.isShot()){
+					if (shot.isTimeToRemoveShot()) {
+						state.getGameObjects().remove(nextElem);
+					}
+	
+					if (shot.isShotFromEnemy() && shot.collidingWith(state.getPlayer())){
+						if(state.getPlayer().getHealthPoints() == 0)
+							state.getGameObjects().remove(state.getPlayer()); // game over
+						else 
+							state.getPlayer().reduceHealthPoints();
+					}
+	
+					 for (Entity entity : changedEntities) {
+					 	if (entity instanceof Enemy) {
+					 		Enemy enemy = (Enemy) entity; 
+					 		if(!enemy.isShot() && !shot.isShotFromEnemy() && shot.collidingWith(enemy)){
+					 			if(enemy.getHealthPoints() == 0)
+					 				state.getGameObjects().remove(enemy);
+					 			else 
+					 				enemy.reduceHealthPoints();
+					 		}	
+					 	}
+					 }
 				}
 			}
 		}
@@ -138,7 +157,6 @@ public class Renderer {
             graphics.drawString("killed: " + state.getPlayer().getKilledCnt(), (700 - metrics2.stringWidth("killed: " + state.getPlayer().getKilledCnt())), 700 - graphics.getFont().getSize());//draw killed enemies
 
         }
-
 	}
 
 	/**
@@ -164,4 +182,5 @@ public class Renderer {
 			}
 		}
 	}
+	
 }

@@ -3,16 +3,24 @@ import src.gfx.Assets;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
+
+import src.entities.Enemy;
+import src.entities.Player;
+import src.game.Game;
+import src.helpers.CollisionBox;
+import src.helpers.Position;
 import src.game.GameLoop;
 import src.helpers.Position;
 import src.state.GameState;
@@ -32,6 +40,9 @@ public class Display extends JFrame {
 	private Canvas canvas;
 	private Renderer renderer;
 	private DebugRenderer debugRenderer;
+
+	
+	public static boolean timeout = true;
 
 	/**
 	 * Creating the game canvas and frame, also creating BufferStrategy to use it on the graphics rendering!
@@ -119,13 +130,16 @@ public class Display extends JFrame {
 		Graphics graphics = bufferStartegy.getDrawGraphics();
 
 
+		// player shooting
 		if(shooting){
-			mousePosition = new Position(mousePosition.getX() + state.lastCameraPosition.getX() , mousePosition.getY() + state.lastCameraPosition.getY());
+			mousePosition = new Position(mousePosition.getX() + state.lastCameraPosition.getX(), 
+				mousePosition.getY() + state.lastCameraPosition.getY());
 			state.addToGameObjects();
 			shooting = false;
 		}
-
+		
 		renderer.render(state, graphics);
+
 
 		if(debugMode){
 			debugRenderer.render(state, graphics);
@@ -134,6 +148,18 @@ public class Display extends JFrame {
 		graphics.dispose();
 		bufferStartegy.show(); // here the displaying of the whole graphics is happening
 
+	}
+
+	public static  boolean inRange(Player player, Enemy enemy){
+		CollisionBox collisionBox = new CollisionBox(
+			new java.awt.Rectangle(
+				(int) enemy.getPosition().getX(),
+				(int) enemy.getPosition().getY(),
+				(int) enemy.getPosition().getX() + Game.SPRITE_SIZE * 3 - Game.SPRITE_SIZE * 2,
+				(int) enemy.getPosition().getY() + Game.SPRITE_SIZE * 3 - Game.SPRITE_SIZE * 2
+			)
+		);
+		return player.getCollisionBox().collidesWith(collisionBox);
 	}
 
 }

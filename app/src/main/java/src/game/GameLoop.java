@@ -14,7 +14,7 @@ public class GameLoop implements Runnable{
     private int fps, ups;
     public static int killedEnemiesCnt=0;
     public GameLoop(Game game){
-        this.game = game;
+        GameLoop.game = game;
         this.myTimerTask = new MyTimerTask(this);
         this.timer = new Timer();
     }
@@ -61,8 +61,9 @@ public class GameLoop implements Runnable{
                     }
                     gl.render();
                 }
-                gl.printState();
+                // gl.printState();
             }
+            //Game.log("Current time: " + (currentTime / 1000) );
         }
     }
     /**
