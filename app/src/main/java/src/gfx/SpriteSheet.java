@@ -23,6 +23,7 @@ public class SpriteSheet {
     private void loadSpritesFromDisk() {
         loadUnits("/sprites/units");
         loadTiles("/sprites/tiles");
+      
     }
 
     /**
@@ -61,6 +62,7 @@ public class SpriteSheet {
             units.put(folderName , spriteSet);
         }
     }
+
 
     /**
      * Getting all the folder names listed on a specified directory (basePath) by using the java.net.URL

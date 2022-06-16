@@ -2,7 +2,7 @@ package src.helpers;
 
 public class Position {
 
-    public static int PROXIMITY_RANGE = 60;
+    public static int PROXIMITY_RANGE = 1;
 
     private double x;
     private double y;

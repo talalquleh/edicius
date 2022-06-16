@@ -39,4 +39,5 @@ public class Vector2D {
             y = y/length ;
         }
     }
+    public String toString() { return x + " " + y; }
 }

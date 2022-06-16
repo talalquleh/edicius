@@ -43,10 +43,31 @@ public abstract class MovingEntity extends Entity {
     @Override
     public void update(State state) { // focus here
         this.state = state;
-        motion.update(controller);
-        handleCollisions(state);
+        Position lastPosition = new Position(position.getX(), position.getY());
+        motion.update(controller, true, true);
         position.apply(motion);
         manageDirection();
+        Position checkPosition = new Position(position.getX(), position.getY());
+        handleCollisions(state);
+        if (!checkPosition.equals(position)) {
+            position = new Position(lastPosition.getX(), lastPosition.getY());
+            if (motion.getVector().getX() != 0 && motion.getVector().getY() != 0) {
+                motion.update(controller, true, false);
+                position.apply(motion);
+                checkPosition = new Position(position.getX(), position.getY());
+                handleCollisions(state);
+                if (!checkPosition.equals(position)) {
+                    position = new Position(lastPosition.getX(), lastPosition.getY());
+                    motion.update(controller, false, true);
+                    position.apply(motion);
+                    checkPosition = new Position(position.getX(), position.getY());
+                    handleCollisions(state);
+                    if (!checkPosition.equals(position)) {
+                        position = new Position(lastPosition.getX(), lastPosition.getY());
+                    } else manageDirection();
+                } else manageDirection();
+            }
+        }
         decideAnimation();
         animation.update(direction);
     }

@@ -22,20 +22,20 @@ public class Motion {
      * Updating the position of the moving entity, according to the controller provided by this moving entity!
      * @param controller
      */
-    public void update(Controller controller ) {
+    public void update(Controller controller, boolean horizontal, boolean vertical ) {
         int deltaX = 0 , deltaY = 0;
         // playerShots = controller.isMouseClicked();
 
-        if(controller.isRequestingUp()) {
+        if(controller.isRequestingUp() && vertical) {
             deltaY--;
         }
-        if(controller.isRequestingDown()) {
+        if(controller.isRequestingDown() && vertical) {
             deltaY++;
         }
-        if(controller.isRequestingLeft()) {
+        if(controller.isRequestingLeft() && horizontal) {
             deltaX--;
         }
-        if(controller.isRequestingRight()) {
+        if(controller.isRequestingRight() && horizontal) {
             deltaX++;
         }
         this.vector = new Vector2D(deltaX , deltaY);

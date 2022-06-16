@@ -1,5 +1,5 @@
 package src.display;
-
+import src.gfx.Assets;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -9,6 +9,13 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+
 import src.entities.Enemy;
 import src.entities.Player;
 import src.game.Game;
@@ -19,6 +26,8 @@ import src.helpers.Position;
 import src.state.GameState;
 import src.state.State;
 import src.input.Input;
+import src.helpers.buttons.MusicButton;
+import src.helpers.buttons.PauseButton;
 
 public class Display extends JFrame {
 
@@ -52,14 +61,26 @@ public class Display extends JFrame {
 		canvas.setPreferredSize(new Dimension(width, height));
 		canvas.setFocusable(false);
 		add(canvas);
+		//for now absolute path have to be used  -> to fix:relative path
+		File file = new File("C:\\Users\\talal\\Desktop\\edicius\\app\\src\\main\\resources\\sprites\\game_music.wav");
+		// File file = new File("../resources/game_music.wav");
+        AudioInputStream as;
+        try {
+            as = AudioSystem.getAudioInputStream(file);
+           MusicButton.instance.music_clip = AudioSystem.getClip();
+            MusicButton.instance.music_clip .open(as);
+			MusicButton.instance.music_clip.start();
+            MusicButton.instance.music_clip.loop(MusicButton.instance.music_clip.LOOP_CONTINUOUSLY);
 
-		try {
-			Image customImage = ImageIO.read(new File("./cursor.png"));
+			//stopped for now to be removed later
+			MusicButton.instance.music_clip.stop();
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e1) {
+            System.out.println("can't open music clip");
+        }
+
+			Image customImage = Assets.loadImage("/sprites/cursor.png");
 			Cursor customCursor = Toolkit.getDefaultToolkit().createCustomCursor(customImage, new Point(0, 0), "customCursor");
 			this.setCursor(customCursor);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 		canvas.addMouseListener(new MouseListener() {
 
@@ -67,6 +88,17 @@ public class Display extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				mousePosition = new Position(e.getX(), e.getY());
 				shooting = true;
+
+				 if (MusicButton.instance.clicked(e.getX(), e.getY())) {
+                    MusicButton.instance.toggleMusic();
+                    return;
+
+                }
+                if (PauseButton.instance.clicked(e.getX(), e.getY())) {
+                    PauseButton.instance.togglePause();
+                    return;
+
+                }
 			}
 
 			@Override
