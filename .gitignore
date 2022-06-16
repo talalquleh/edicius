@@ -12,3 +12,6 @@ projectGame.iml
 
 # VsCode
 .vscode
+
+# app backup files
+bin
