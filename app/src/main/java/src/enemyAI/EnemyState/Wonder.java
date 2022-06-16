@@ -5,6 +5,7 @@ import src.enemyAI.EnemyTransition;
 import src.entities.Enemy;
 import src.entities.Player;
 import src.game.GameLoop;
+import src.helpers.CollisionBox;
 import src.helpers.Position;
 import src.state.State;
 

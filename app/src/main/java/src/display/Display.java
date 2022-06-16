@@ -14,6 +14,9 @@ import src.entities.Player;
 import src.game.Game;
 import src.helpers.CollisionBox;
 import src.helpers.Position;
+import src.game.GameLoop;
+import src.helpers.Position;
+import src.state.GameState;
 import src.state.State;
 import src.input.Input;
 
@@ -49,14 +52,14 @@ public class Display extends JFrame {
 		canvas.setPreferredSize(new Dimension(width, height));
 		canvas.setFocusable(false);
 		add(canvas);
-			Image customImage;
-			try {
-				customImage = ImageIO.read(new File("../../../../resources/cursor.png"));
-				Cursor customCursor = Toolkit.getDefaultToolkit().createCustomCursor(customImage, new Point(0, 0), "customCursor");
-				this.setCursor(customCursor);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+
+		try {
+			Image customImage = ImageIO.read(new File("./cursor.png"));
+			Cursor customCursor = Toolkit.getDefaultToolkit().createCustomCursor(customImage, new Point(0, 0), "customCursor");
+			this.setCursor(customCursor);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		canvas.addMouseListener(new MouseListener() {
 

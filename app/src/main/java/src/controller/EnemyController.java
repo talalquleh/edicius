@@ -1,5 +1,6 @@
 package src.controller;
 
+import src.helpers.CollisionBox;
 import src.helpers.Position;
 
 import java.awt.*;

@@ -4,6 +4,8 @@ import src.enemyAI.EnemyState.EnemyState;
 import src.enemyAI.EnemyState.Stand;
 import src.enemyAI.EnemyState.Wonder;
 import src.entities.Enemy;
+import src.helpers.CollisionBox;
+import src.helpers.Position;
 import src.state.State;
 
 

@@ -2,12 +2,16 @@ package src.entities;
 
 import src.controller.Controller;
 import src.enemyAI.Brain;
+import src.display.Display;
+import src.enemyAI.Brain;
+import src.game.Game;
 import src.gfx.Animation;
 import src.gfx.SpriteSheet;
 import src.helpers.CollisionBox;
 import src.helpers.Position;
 import src.state.State;
 import static src.display.Display.inRange;
+
 
 import java.awt.*;
 
