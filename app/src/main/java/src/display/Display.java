@@ -7,7 +7,6 @@ import java.awt.image.BufferStrategy;
 import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import javax.sound.sampled.AudioInputStream;
@@ -21,9 +20,6 @@ import src.entities.Player;
 import src.game.Game;
 import src.helpers.CollisionBox;
 import src.helpers.Position;
-import src.game.GameLoop;
-import src.helpers.Position;
-import src.state.GameState;
 import src.state.State;
 import src.input.Input;
 import src.helpers.buttons.MusicButton;

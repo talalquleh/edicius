@@ -2,9 +2,6 @@ package src.entities;
 
 import src.controller.Controller;
 import src.enemyAI.Brain;
-import src.display.Display;
-import src.enemyAI.Brain;
-import src.game.Game;
 import src.gfx.Animation;
 import src.gfx.SpriteSheet;
 import src.helpers.CollisionBox;
@@ -45,7 +42,7 @@ public class Enemy extends MovingEntity {
         timeToRemoveShot  = false;
         changeSpriteLibrary = spriteLibrary;
         isEnemyShot = false;
-        healthPoints = 6;
+        healthPoints = 60;
     }
 
     public void isShot(SpriteSheet spriteLibrary){
@@ -96,12 +93,6 @@ public class Enemy extends MovingEntity {
                 }
             }
         }
-        // if(other instanceof Enemy && this.isShot){
-        //     if(((Enemy) other).getCollisionBox().collidesWith(this.getCollisionBox())){
-        //         timeToRemoveShot = true;
-        //     }
-        // }
-
     }
 
     public boolean isTimeToRemoveShot() {
@@ -127,7 +118,7 @@ public class Enemy extends MovingEntity {
             this.position = new Position( x, y);
             if (this.getCollisionBox().collidesWith(new CollisionBox
                 (
-                new Rectangle(target.intX(), target.intY(), 15, 15)
+                new Rectangle(target.intX(), target.intY(), 5, 5)
                 )
             )){
                 this.timeToRemoveShot = true;

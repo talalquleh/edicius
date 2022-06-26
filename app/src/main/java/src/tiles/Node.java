@@ -1,10 +1,7 @@
 package src.tiles;
 
-import src.game.Game;
 import src.helpers.IntVector2D;
-//import helpers.Vector2i;
 import src.state.State;
-import src.worlds.GameMap;
 
 import java.util.*;
 

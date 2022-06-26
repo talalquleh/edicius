@@ -1,8 +1,5 @@
 package src.helpers.buttons;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
 
 public class PauseButton extends Button {
     public static PauseButton instance = new PauseButton(MusicButton.instance.x + MusicButton.instance.width + 10, MusicButton.instance.y, 100, 40);

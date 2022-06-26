@@ -8,6 +8,7 @@ import src.entities.Entity;
 import src.game.Game;
 import src.helpers.Position;
 import src.helpers.Size;
+import src.state.GameState;
 import src.state.State;
 import src.tiles.Tile;
 import src.gfx.Camera;
@@ -94,8 +95,10 @@ public class Renderer {
 					 	if (entity instanceof Enemy) {
 					 		Enemy enemy = (Enemy) entity; 
 					 		if(!enemy.isShot() && !shot.isShotFromEnemy() && shot.collidingWith(enemy)){
-					 			if(enemy.getHealthPoints() == 0)
+					 			if(enemy.getHealthPoints() == 0){
 					 				state.getGameObjects().remove(enemy);
+									Game.COUNT_OF_ENEMIES -= 1;
+								}
 					 			else 
 					 				enemy.reduceHealthPoints();
 					 		}	
@@ -103,6 +106,15 @@ public class Renderer {
 					 }
 				}
 			}
+		}
+		if(Game.COUNT_OF_ENEMIES == 0){
+			Game.game_state = "WIN";
+		}
+		if(state.getPlayer().getHealthPoints() == 0){
+			Game.game_state = "LOSE";
+		}
+		if(Game.game_state != "NONE"){
+			// new GameOver(Game.game_state);
 		}
 		//in case player dead
 

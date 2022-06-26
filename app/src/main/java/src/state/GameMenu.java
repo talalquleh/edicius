@@ -4,15 +4,10 @@ import src.game.Game;
 import src.game.GameLoop;
 import src.gfx.Assets;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class GameMenu extends JPanel implements MouseListener {
 

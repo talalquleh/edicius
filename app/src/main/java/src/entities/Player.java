@@ -7,7 +7,7 @@ import src.helpers.CollisionBox;
 
 public class Player extends MovingEntity {
 
-	private int healthPoints = 1000;
+	private int healthPoints = 300;
 
 	/**
 	 * Takes a Controller and a SpriteSheet that are going to identify all the components of the player!

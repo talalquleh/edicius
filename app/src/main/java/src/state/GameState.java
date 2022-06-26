@@ -24,19 +24,19 @@ public class GameState extends State{
         gameMap = new GameMap(new Size(20,20), spriteLibrary);
         player = new Player(new PlayerController(input) , spriteLibrary);
         enemies = new ArrayList<>();
-        final int enemyCount = 10;
-        for (int i = 0; i < enemyCount; i++) {
-            Enemy enemy = new Enemy(new EnemyController(), spriteLibrary);
-            enemies.add(enemy);
-        }
 
-        placeRandomEnimies(enemies, this);
+        placeRandomEnimies(enemies, this, 10);
         gameObjects.add(player);
         gameObjects.addAll(enemies);
         camera.focusOn(player);
     }
 
-    private void placeRandomEnimies(List<Enemy> enemies, State state) {
+    public void placeRandomEnimies(List<Enemy> enemies, State state, int enemyCount) {        
+        for (int i = 0; i < enemyCount; i++) {
+            Enemy enemy = new Enemy(new EnemyController(), spriteLibrary);
+            enemies.add(enemy);
+        }
+
         List<Point> possiblePosition = new ArrayList<>();
         for (int i = 0; i < state.getGameMap().getTiles().length; i++) {
             for (int j = 0; j < state.getGameMap().getTiles()[i].length; j++) {
@@ -45,6 +45,7 @@ public class GameState extends State{
                 }
             }
         }
+        
         Random r = new Random();
         for (Enemy enemy: enemies) {
             Point randomPosition = possiblePosition.get(r.nextInt(possiblePosition.size()));

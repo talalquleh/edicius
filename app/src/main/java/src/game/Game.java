@@ -12,6 +12,8 @@ import src.input.Input;
 public class Game {
 
     public static final int SPRITE_SIZE = 64;
+    public static int  COUNT_OF_ENEMIES = 10;
+    public static String game_state = "NONE";
 
     private Display display;
     private Input input;
