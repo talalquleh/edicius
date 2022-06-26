@@ -61,7 +61,7 @@ public class State {
     public GameMap getGameMap() {
         return this.gameMap;
     }
-
+    public void renderEnemies(int level){;}
     public Player getPlayer() { return this.player ; }
 
     public Position getRandomPosition() {

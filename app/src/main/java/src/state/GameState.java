@@ -24,15 +24,10 @@ public class GameState extends State{
         gameMap = new GameMap(new Size(20,20), spriteLibrary);
         player = new Player(new PlayerController(input) , spriteLibrary);
         enemies = new ArrayList<>();
-        final int enemyCount = 10;
-        for (int i = 0; i < enemyCount; i++) {
-            Enemy enemy = new Enemy(new EnemyController(), spriteLibrary);
-            enemies.add(enemy);
-        }
-
-        placeRandomEnimies(enemies, this);
+        renderEnemies(player.getLevel());
+        
+        // final int enemyCount = 10;
         gameObjects.add(player);
-        gameObjects.addAll(enemies);
         camera.focusOn(player);
     }
 
@@ -64,6 +59,7 @@ public class GameState extends State{
     public List<Enemy> getEnemies(){
         return this.enemies;
     }
+  
 
     @Override
     public void addToGameObjects(){
@@ -73,6 +69,17 @@ public class GameState extends State{
         en.isShot(spriteLibrary);
 
         gameObjects.add(en);
+    }
+    @Override
+    public void renderEnemies(int level){
+        int enemies_cnt=level*2;
+        for (int i = 0; i < enemies_cnt; i++) {
+            Enemy enemy = new Enemy(new EnemyController(), spriteLibrary);
+            enemies.add(enemy);
+        }
+        placeRandomEnimies(enemies, this);
+        gameObjects.addAll(enemies);
+
     }
 
     @Override

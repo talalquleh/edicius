@@ -1,6 +1,7 @@
 package src.game;
 import java.util.Timer;
 import java.util.TimerTask;
+import src.helpers.buttons.PauseButton;
 public class GameLoop implements Runnable{
 
     public static final int UPDATES_PER_SECOND = 60;
@@ -70,8 +71,10 @@ public class GameLoop implements Runnable{
      * Calling the update function on the game class.
      */
     private void update() {
-        game.update();
-        ups++;
+        if (!PauseButton.instance.isPaused){
+            game.update();
+            ups++;
+        }
     }
 
     /**

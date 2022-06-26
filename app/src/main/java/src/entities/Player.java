@@ -7,7 +7,9 @@ import src.helpers.CollisionBox;
 
 public class Player extends MovingEntity {
 
-	private int healthPoints = 1000;
+	private int healthPoints = 100;
+	private int level = 1;
+	private int cntEnemiesPerLevel=0;
 
 	/**
 	 * Takes a Controller and a SpriteSheet that are going to identify all the components of the player!
@@ -18,6 +20,7 @@ public class Player extends MovingEntity {
 	public Player(Controller controller, SpriteSheet spriteLibrary) {
 		super(controller, spriteLibrary);
 		motion.setMotion(4.0);
+		setEnemiesCntPerLevel();
 	}
 private  int health=100; private int killedCnt = 0;
 	@Override
@@ -31,18 +34,25 @@ private  int health=100; private int killedCnt = 0;
 			}
 		}
 	}
-	public void setHealth(int health){
-		this.health=health;
-	}
-	public  int getHealth(){
-		return this.health;
-	}
+	// public void setHealth(int health){
+	// 	this.health=health;
+	// }
+	// public  int getHealth(){
+	// 	return this.health;
+	// }
 	public  boolean isAlive(){
 		return this.health>0;
 	}
-       public void setKilledCnt(int killedCnt) {
-        this.killedCnt = killedCnt;
-    }
+	public void setEnemiesCntPerLevel(){
+		this.cntEnemiesPerLevel=this.getLevel()*2;
+	}
+	public void decreaseEnemiesCntPerLevel(){
+		this.cntEnemiesPerLevel-=1;
+	}
+
+      public void increaseKillCnt(){
+		this.killedCnt+=1;
+	  }
 
     public int getKilledCnt() {
         return this.killedCnt;
@@ -50,9 +60,19 @@ private  int health=100; private int killedCnt = 0;
 	public int getHealthPoints(){
 		return healthPoints;
 	}
+	public boolean can_upgrade_nextLevel(){
+		return this.cntEnemiesPerLevel==0;
+	}
 
 	public void reduceHealthPoints(){
 		this.healthPoints -= 1;
 	}
 
+	public int getLevel(){
+		return this.level;
+	}
+	public void upgradeLevel(){
+		this.level+=1;
+		setEnemiesCntPerLevel();
+	}
 }
