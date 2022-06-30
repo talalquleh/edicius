@@ -1,6 +1,5 @@
 package src.controller;
 
-import src.helpers.CollisionBox;
 import src.helpers.Position;
 
 import java.awt.*;
@@ -33,21 +32,26 @@ public class EnemyController implements Controller{
         return left;
     }
 
-    //public void moveToTarget(Position target, Position current, List<CollisionBox> mapCollisionBoxes, CollisionBox enemyCollisionBox)
+    /**
+     * Move an object of a given position to a target of a given position.
+     * 
+     * @param target
+     * @param current
+     */
     public void moveToTarget(Position target, Position current) {
         double deltaX = target.getX() - current.getX();
         double deltaY = target.getY() - current.getY();
 
-//        if(mapCollisionBoxes.stream().anyMatch(mapBlock -> mapBlock.collidesWith(enemyCollisionBox))){
-//            // here we will add the path finding algorithm
-//        }else{
-            up    = deltaY < 0 && Math.abs(deltaY) > Position.PROXIMITY_RANGE;
-            right = deltaX > 0 && Math.abs(deltaX) > Position.PROXIMITY_RANGE;
-            down  = deltaY > 0 && Math.abs(deltaY) > Position.PROXIMITY_RANGE;
-            left  = deltaX < 0 && Math.abs(deltaX) > Position.PROXIMITY_RANGE;
-        //}
+        up    = deltaY < 0 && Math.abs(deltaY) > Position.PROXIMITY_RANGE;
+        right = deltaX > 0 && Math.abs(deltaX) > Position.PROXIMITY_RANGE;
+        down  = deltaY > 0 && Math.abs(deltaY) > Position.PROXIMITY_RANGE;
+        left  = deltaX < 0 && Math.abs(deltaX) > Position.PROXIMITY_RANGE;
     }
 
+    /**
+     * Stop and object which has this controller from moving.
+     * 
+     */
     public void stop() {
         up    = false;
         right = false;

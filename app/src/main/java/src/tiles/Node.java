@@ -1,10 +1,7 @@
 package src.tiles;
 
-import src.game.Game;
 import src.helpers.IntVector2D;
-//import helpers.Vector2i;
 import src.state.State;
-import src.worlds.GameMap;
 
 import java.util.*;
 
@@ -14,15 +11,22 @@ public class Node {
 
     public double fCost, gCost, hCost;
     /*
-    initializing Node to represent a tile in our map,
-    needed to implement our A* search Algorithm
-    hCost-> is the heuristic path (straight line distance)
-    gCost-> node to node cost
-    fCost->combination of both
-    note:lower cost doesn't necessarily mean shortest distance
-    and our algorithm will take into consideration the cost if we give it enough details(further development).
+    
      */
 
+     /**
+      * initializing Node to represent a tile in our map,
+      * needed to implement our A* search Algorithm
+      * hCost-> is the heuristic path (straight line distance)
+      * gCost-> node to node cost
+      * fCost->combination of both
+      * note:lower cost doesn't necessarily mean shortest distance
+      * and our algorithm will take into consideration the cost if we give it enough details(further development).
+      * @param tile
+      * @param nodeParent
+      * @param gCost
+      * @param hCost
+      */
     public Node(IntVector2D tile, Node nodeParent, double gCost, double hCost) {
         this.tile = tile;
         this.nodeParent = nodeParent;
@@ -32,8 +36,8 @@ public class Node {
     }
     public String toString() { return this.tile.toString(); }
 
-    /*
-    comparing nodes' distances
+    /**
+     * comparing nodes' distances
      */
     private static Comparator<Node> sortNodes = new Comparator<Node>() {
         public int compare(Node n0, Node n1) {
@@ -45,6 +49,14 @@ public class Node {
 
     };
 
+    /**
+     * Find the shortest bath between a start and goal points using A* algorithm.
+     * 
+     * @param start
+     * @param goal
+     * @param state
+     * @return the shortest path between the start and goal points
+     */
     public static List<Node> findPath(IntVector2D start, IntVector2D goal, State state) {
         Set<Node> openList = new HashSet<Node>();
         Map<IntVector2D, Node> mapToNode = new HashMap<IntVector2D, Node>();
@@ -93,6 +105,12 @@ public class Node {
 
     }
 
+    /**
+     * Check whether a vector exists on a list or not.
+     * @param list
+     * @param vec
+     * @return whether a vector exists on a list or not.
+     */
     public static boolean vecInList(List<Node> list, IntVector2D vec) {
         for (Node n : list) {
             if (n.tile.equals(vec)) return true;

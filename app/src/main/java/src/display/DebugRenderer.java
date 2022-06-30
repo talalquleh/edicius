@@ -15,6 +15,13 @@ public class DebugRenderer {
                 .forEach( collisionBox -> drawCollisionBox(collisionBox, graphics, camera) );
     }
 
+    /**
+     * Draw a red rectangle around a given object for debugging purposes.
+     * 
+     * @param box
+     * @param g
+     * @param camera
+     */
     private void drawCollisionBox(CollisionBox box, Graphics g, Camera camera){
         g.setColor(Color.red);
         g.drawRect(

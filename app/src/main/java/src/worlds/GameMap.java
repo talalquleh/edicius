@@ -32,6 +32,11 @@ public class GameMap {
 		loadMaps("/maps");
 	}
 
+	/**
+	 * Initialize an empty matrix for the map tiles.
+	 * 
+	 * @param spriteSheet
+	 */
 	private void initializeTiles(SpriteSheet spriteSheet) {
 		for (Tile[] row: tiles){
 			Arrays.fill(row, new Tile(spriteSheet));
@@ -57,6 +62,11 @@ public class GameMap {
 		return new Position(x, y);
 	}
 
+	/**
+	 * Load the map from a file.
+	 * 
+	 * @param path
+	 */
 	private void loadMaps(String path) {
 		String [] mapsNames = getFilesFromFolder(path);
 		maps = new HashMap<>();
@@ -84,6 +94,12 @@ public class GameMap {
 		}
 	}
 
+	/**
+	 * Get a file bath from inside a folder.
+	 * 
+	 * @param basePath
+	 * @return a file bath from inside a folder.
+	 */
 	private String[] getFilesFromFolder(String basePath) {
 		URL resource = SpriteSheet.class.getResource(basePath);
 		File file;

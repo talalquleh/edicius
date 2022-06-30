@@ -7,7 +7,7 @@ import src.helpers.CollisionBox;
 
 public class Player extends MovingEntity {
 
-	private int healthPoints = 1000;
+	private int healthPoints = 300;
 
 	/**
 	 * Takes a Controller and a SpriteSheet that are going to identify all the components of the player!
@@ -40,7 +40,7 @@ private  int health=100; private int killedCnt = 0;
 	public  boolean isAlive(){
 		return this.health>0;
 	}
-       public void setKilledCnt(int killedCnt) {
+    public void setKilledCnt(int killedCnt) {
         this.killedCnt = killedCnt;
     }
 

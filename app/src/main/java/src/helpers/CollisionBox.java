@@ -10,6 +10,12 @@ public class CollisionBox {
         this.bounds = bounds;
     }
 
+    /**
+     * Check whether the current collision box collides with another.
+     * 
+     * @param other
+     * @return whether the current collision box collides with another.
+     */
     public boolean collidesWith(CollisionBox other){
         return bounds.intersects(other.getBounds());
     }

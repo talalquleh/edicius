@@ -3,7 +3,6 @@
  */
 package src;
 
-import src.game.*;
 import src.state.GameMenu;
 
 public class App {

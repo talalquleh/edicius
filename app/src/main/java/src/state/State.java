@@ -51,6 +51,10 @@ public class State {
         camera.update(this);
     }
 
+    /**
+     * Sort the game object by their positions.
+     * 
+     */
     private void sortObjectsByPosition() {
         gameObjects.sort(Comparator.comparing(gameObject -> gameObject.getPosition().getY()));
     }
@@ -68,6 +72,11 @@ public class State {
         return gameMap.getRandomPosition();
     }
 
+    /**
+     * Get the entities that collides with each other.
+     * @param entities
+     * @return
+     */
     public List<Entity> getCollidingEntities(Entity entities) {
         return this.gameObjects.stream().filter(other -> other.collidingWith(entities)).collect(Collectors.toList());
     }
@@ -78,9 +87,16 @@ public class State {
         return null;
     }
 
+    /**
+     * Add a new entity to the game objects list.
+     */
     public void addToGameObjects(){
     }
 
+    /**
+     * Add a new shot.
+     * @param en
+     */
     public void addEnemyShotsGameObjects(Enemy en){
     }
 

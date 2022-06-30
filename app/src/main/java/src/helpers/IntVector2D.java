@@ -44,13 +44,38 @@ public class IntVector2D {
     }
 
 
+    /**
+     * Get the distance between 2 vectors.
+     * 
+     * @param tile
+     * @param goal
+     * @return double value about the distance.
+     */
     public static double getDistance(IntVector2D tile, IntVector2D goal) {
         return Math.sqrt(Math.pow(tile.getX() - goal.getX(), 2) + Math.pow(tile.getY() - goal.getY(), 2));
     }
+
+    /**
+     * Getting the Manhattan Distance of 2 vectors.
+     * To read more about Manhattan Distance please read https://iq.opengenus.org/manhattan-distance/
+     * 
+     * @param tile
+     * @param goal
+     * @return Manhattan Distance of 2 vectors.
+     */
     public static double getManhattanDistance(IntVector2D tile, IntVector2D goal)
     {
         return Math.abs(tile.getX() - goal.getX()) + Math.abs(tile.getY() - goal.getY());
     }
+
+    /**
+     * Getting the Octile Distance of 2 vectors.
+     * the octile heuristic is max(x, y) + (sqrt(2)-1)*min(x, y)
+     * 
+     * @param tile
+     * @param goal
+     * @return Octile Distance of 2 vectors.
+     */
     public static double getOctileDistance(IntVector2D tile, IntVector2D goal)
     {
         double C = 1, D = Math.sqrt(2);
@@ -59,6 +84,14 @@ public class IntVector2D {
         double deltay = Math.abs(tile.y-goal.y);
         return (E * (deltax - deltay) + D * (deltax + deltay)) / 2;
     }
+
+    /**
+     * Get the neighbors of 2 points.
+     * 
+     * @param maxx
+     * @param maxy
+     * @return List of vectors that are neighbors of 2 points.
+     */
     public List<IntVector2D> getNeighbors(int maxx, int maxy)
     {
         List<IntVector2D> l = new ArrayList<>();
@@ -73,10 +106,14 @@ public class IntVector2D {
         if (x != maxx-1 && y != 0) l.add(new IntVector2D(x+1, y-1));
         return l;
     }
+
+    @Override
     public int hashCode()
     {
         return Objects.hash(x, y);
     }
+
+    @Override
     public boolean equals(Object other)
     {
         if (other == null) return false;
