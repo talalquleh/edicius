@@ -47,15 +47,25 @@ public class Position {
         this.y = y;
     }
 
+    /**
+     * Check whether a given position is in the range of the current position or not.
+     * 
+     * @param position
+     * @return whether a given position is in the range of the current position or not.
+     */
     public boolean isInRangeOf(Position position) {
         return 		(Math.abs(x -position.getX()) < Position.PROXIMITY_RANGE)
                 && 	(Math.abs(y -position.getY()) < Position.PROXIMITY_RANGE);
     }
+
+    @Override
     public boolean equals(Object other)
     {
         if (other == null || !(other instanceof Position)) return false;
         return ((Position)other).getX() == x && ((Position)other).getY() == y;
     }
+
+    @Override
     public String toString()
     {
         return "(" + x + ", " + y + ")";

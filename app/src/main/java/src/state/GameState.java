@@ -31,6 +31,13 @@ public class GameState extends State{
         camera.focusOn(player);
     }
 
+    /**
+     * Place enemies in random positions in the map.
+     * 
+     * @param enemies
+     * @param state
+     * @param enemyCount
+     */
     public void placeRandomEnimies(List<Enemy> enemies, State state, int enemyCount) {        
         for (int i = 0; i < enemyCount; i++) {
             Enemy enemy = new Enemy(new EnemyController(), spriteLibrary);

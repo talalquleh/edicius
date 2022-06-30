@@ -13,7 +13,12 @@ public class Brain {
         transitionTo("stand");
     }
 
-
+    /**
+     * Update the brain status of the enemy.
+     * 
+     * @param state
+     * @param currentEnemy
+     */
     public void update(State state, Enemy currentEnemy){
         currentState.update(state, currentEnemy, state.getPlayer().getPosition());
 
@@ -22,6 +27,11 @@ public class Brain {
         }
     }
 
+    /**
+     * Change the transition status of the enemy to a given status.
+     * 
+     * @param nextState
+     */
     private void transitionTo(String nextState) {
         switch (nextState){
             case "wonder":

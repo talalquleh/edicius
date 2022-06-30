@@ -8,7 +8,6 @@ import src.entities.Entity;
 import src.game.Game;
 import src.helpers.Position;
 import src.helpers.Size;
-import src.state.GameState;
 import src.state.State;
 import src.tiles.Tile;
 import src.gfx.Camera;
@@ -18,12 +17,26 @@ import src.helpers.buttons.PauseButton;
 
 public class Renderer {
 
+	/**
+	 * Get a rectangle that determine the pixels position of an entity.
+	 * 
+	 * @param pos
+	 * @param s
+	 * @return position pox.
+	 */
 	public  static Rectangle entityToPixel(Position pos, Size s)
 	{
 		return new Rectangle(pos.intX() - (int)s.getWidth() / 2,
 				pos.intY() - (int)s.getHeight() / 2,
 				(int)s.getWidth(), (int)s.getHeight());
 	}
+
+	/**
+	 * Get a rectangle that determine the tails position of an entity.
+	 * 
+	 * @param r
+	 * @return rectangle tail.
+	 */
 	public static Rectangle entityToTile(Rectangle r)
 	{
 		return new Rectangle(r.x / Game.SPRITE_SIZE, r.y / Game.SPRITE_SIZE,

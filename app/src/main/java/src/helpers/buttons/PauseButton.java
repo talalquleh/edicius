@@ -11,7 +11,9 @@ public class PauseButton extends Button {
         super(x, y, width, height);
     }
 
-
+    /**
+     * Stop the music.
+     */
     public void togglePause() {
         isPaused = !isPaused;
         if (isPaused) {

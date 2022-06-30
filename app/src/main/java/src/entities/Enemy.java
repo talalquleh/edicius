@@ -20,7 +20,6 @@ public class Enemy extends MovingEntity {
     private Position target;
     private Position delta;
     private boolean timeToRemoveShot;
-    private SpriteSheet changeSpriteLibrary;
     private long lastShootingTime = 0;
 
     private boolean isEnemyShot;
@@ -40,28 +39,43 @@ public class Enemy extends MovingEntity {
         this.target = new Position(0,0);
         this.delta = new Position(0,0);
         timeToRemoveShot  = false;
-        changeSpriteLibrary = spriteLibrary;
         isEnemyShot = false;
         healthPoints = 60;
     }
 
+    /**
+     * Change the current enemy to a shot.
+     * 
+     * @param spriteLibrary
+     */
     public void isShot(SpriteSheet spriteLibrary){
         this.animation = new Animation(spriteLibrary.getUnit("shot"));
         this.isShot = true;
     }
 
-    public void killPlayer(){
-        this.animation = new Animation(this.changeSpriteLibrary.getUnit("shot"));
-    }
-
+    /**
+     * Check whether the current enemy is a shot or not.
+     * 
+     * @return whether the current enemy is a shot or not.
+     */
     public boolean isShot() {
         return isShot;
     }
 
+    /**
+     * Check to which this shot belong to (player or enemy).
+     * 
+     * @return player or enemy that has this shot.
+     */
     public String getBelongsTo() {
         return belongsTo;
     }
 
+    /**
+     * Set the shot to belong to an enemy or a player.
+     * 
+     * @param belongsTo
+     */
     public void setBelongsTo(String belongsTo) {
         this.belongsTo = belongsTo;
     }
@@ -95,10 +109,19 @@ public class Enemy extends MovingEntity {
         }
     }
 
+    /**
+     * Check whether it is time to remove an 
+     * @return
+     */
     public boolean isTimeToRemoveShot() {
         return timeToRemoveShot;
     }
 
+    /**
+     * Set the target position of the shot.
+     * 
+     * @param position
+     */
     public void setTarget(Position position){
         this.target = position;
         this.delta =  new Position((position.getX() - this.position.getX()) * 0.03 , (position.getY() - this.position.getY()) * 0.03);

@@ -31,6 +31,12 @@ public class Wonder extends EnemyState{
         return new EnemyTransition("stand", ((state, currenEnemy)-> arrived(currenEnemy)));
     }
 
+    /**
+	 * Get a rectangle that determine the tails position of an entity.
+	 * 
+	 * @param r
+	 * @return rectangle tail.
+	 */
     public static Rectangle entityToTile(Rectangle r)
 	{
 		return new Rectangle(r.x / Game.SPRITE_SIZE, r.y / Game.SPRITE_SIZE,
@@ -66,9 +72,15 @@ public class Wonder extends EnemyState{
                 controller.moveToTarget(new Position((vec.getX()) * Game.SPRITE_SIZE + Game.SPRITE_SIZE/2,(vec.getY()) * Game.SPRITE_SIZE + Game.SPRITE_SIZE/2), currentEnemy.getPosition());
 
             }
-    }
+        }
     }
 
+    /**
+     * Check whether an enemy arrived to the player or not.
+     * 
+     * @param currentEnemy
+     * @return whether an enemy arrived to the player or not.
+     */
     private boolean arrived(Enemy currentEnemy) {
         return currentEnemy.getPosition().isInRangeOf(player.getPosition());
     }

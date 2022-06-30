@@ -40,7 +40,7 @@ private  int health=100; private int killedCnt = 0;
 	public  boolean isAlive(){
 		return this.health>0;
 	}
-       public void setKilledCnt(int killedCnt) {
+    public void setKilledCnt(int killedCnt) {
         this.killedCnt = killedCnt;
     }
 

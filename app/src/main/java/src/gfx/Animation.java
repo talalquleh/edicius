@@ -53,6 +53,11 @@ public class Animation {
         }
     }
 
+    /**
+     * Play the animation of a given entity,
+     * 
+     * @param name
+     */
     public void playAnimation(String name) {
         this.currentAnimationSheet = (BufferedImage) this.spriteSet.get(name);
     }

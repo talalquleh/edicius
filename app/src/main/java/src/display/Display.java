@@ -146,6 +146,13 @@ public class Display extends JFrame {
 
 	}
 
+	/**
+	 * Check whether an enemy is the range of the player or not.
+	 * 
+	 * @param player
+	 * @param enemy
+	 * @return whether enemy is in range of player or not.
+	 */
 	public static  boolean inRange(Player player, Enemy enemy){
 		CollisionBox collisionBox = new CollisionBox(
 			new java.awt.Rectangle(

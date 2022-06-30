@@ -72,6 +72,11 @@ public abstract class MovingEntity extends Entity {
         animation.update(direction);
     }
 
+    /**
+     * Handle the collision of a current entity.
+     * 
+     * @param state
+     */
     protected void handleCollisions(State state){
         state.getCollidingEntities(this).forEach(this::handleCollision);
     }
@@ -94,6 +99,11 @@ public abstract class MovingEntity extends Entity {
         return getCollisionBox().collidesWith(other.getCollisionBox());
     }
 
+    /**
+     * Get the collision boxes of the walls.
+     * 
+     * @return the collision boxes of the walls.
+     */
     protected List<CollisionBox> getMapCollisionBoxes(){
         List<CollisionBox> mcb = new ArrayList<CollisionBox>();
         for (int i = 0; i < this.state.getMap("map1.txt").length ; i++) {
@@ -108,6 +118,11 @@ public abstract class MovingEntity extends Entity {
         return mcb;
     }
 
+    /**
+     * Handle the collision if an entity is walking throw a wall.
+     * 
+     * @param speed
+     */
     protected void handleWallCollision(double speed){
         switch (this.direction){
             case S:

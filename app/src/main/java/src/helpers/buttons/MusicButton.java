@@ -15,6 +15,9 @@ public class MusicButton extends Button {
         this.setScaledImage("/sprites/btns/soundOn.png");
     }
 
+    /**
+     * play the music.
+     */
     public void toggleMusic() {
         isActive = !isActive;
         if (isActive) {
