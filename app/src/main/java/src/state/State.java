@@ -26,6 +26,8 @@ public class State {
     protected List<Enemy> enemies;
     public Position lastCameraPosition;
     public HashMap<Entity, Position> lastEntityPositions;
+    protected int gameLevel=1;
+    protected int enemiesCnt=0;
 
     public State(Size windowSize, Input input) {
         this.input = input;
@@ -34,6 +36,8 @@ public class State {
         gameMap = new GameMap(new Size(50, 50), spriteLibrary);
         camera = new Camera(windowSize);
         lastEntityPositions = new HashMap<>();
+        this.setEnemiesCntBasedOnLevel();
+
     }
 
     public Camera getCamera() {
@@ -70,6 +74,19 @@ public class State {
 
     public Position getRandomPosition() {
         return gameMap.getRandomPosition();
+    }
+    public int getGameLevel(){
+        return this.gameLevel;
+    }
+
+    public void increaseLevel(){
+        this.gameLevel+=1;
+    }
+    public void setEnemiesCntBasedOnLevel(){
+            this.enemiesCnt=this.gameLevel*2;
+    }
+    public int getEnemiesCnt(){
+        return this.enemiesCnt;
     }
 
     /**
