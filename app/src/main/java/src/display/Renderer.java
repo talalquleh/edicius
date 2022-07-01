@@ -110,7 +110,8 @@ public class Renderer {
 					 		if(!enemy.isShot() && !shot.isShotFromEnemy() && shot.collidingWith(enemy)){
 					 			if(enemy.getHealthPoints() == 0){
 					 				state.getGameObjects().remove(enemy);
-									Game.COUNT_OF_ENEMIES -= 1;
+									// Game.COUNT_OF_ENEMIES -= 1;
+									state.decreaseEnemiesPerLevel();
 									state.getPlayer().increaseKillCnt();
 								}
 					 			else 
@@ -121,15 +122,15 @@ public class Renderer {
 				}
 			}
 		}
-		if(Game.COUNT_OF_ENEMIES == 0){
-			Game.game_state = "WIN";
-		}
-		if(state.getPlayer().getHealthPoints() == 0){
-			Game.game_state = "LOSE";
-		}
-		if(Game.game_state != "NONE"){
-			// new GameOver(Game.game_state);
-		}
+		// if(Game.COUNT_OF_ENEMIES == 0){
+		// 	Game.game_state = "WIN";
+		// }
+		// if(state.getPlayer().getHealthPoints() == 0){
+		// 	Game.game_state = "LOSE";
+		// }
+		// if(Game.game_state != "NONE"){
+		// 	// new GameOver(Game.game_state);
+		// }
 		//in case player dead
 
         //progress bars and button
