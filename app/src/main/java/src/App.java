@@ -8,6 +8,6 @@ import src.state.GameMenu;
 public class App {
     public static void main(String[] args){
         // new Thread(new GameLoop(new Game(699, 700))).start();
-        new GameMenu();
+        new GameMenu(false,0);
     }
 }

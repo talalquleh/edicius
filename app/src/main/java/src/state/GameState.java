@@ -95,7 +95,8 @@ public class GameState extends State{
     }
     @Override
       public void resetEnemiesPerLevel(){
-        placeRandomEnimies(enemies, this, this.enemiesCntToBeKilledPerLevel);
+        // placeRandomEnimies(enemies, this, this.enemiesCntToBeKilledPerLevel);
+        placeRandomEnimies(enemies, this, 5);
         gameObjects.addAll(enemies);
      }
 

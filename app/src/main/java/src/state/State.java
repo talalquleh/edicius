@@ -35,6 +35,8 @@ public class State {
     public HashMap<Entity, Position> lastEntityPositions;
     protected int gameLevel=1;
     protected int enemiesCntToBeKilledPerLevel=0;
+    public  static boolean gameOver= false;
+    public static int totalKills=0;
 
     public State(Size windowSize, Input input) {
         this.input = input;
@@ -52,6 +54,7 @@ public class State {
     public Camera getCamera() {
         return camera;
     }
+    
 
     /**
      * Updating all the game objects by calling their update methods.

@@ -44,6 +44,9 @@ public class Game {
     public void update(){
         state.update();
     }
+    public Display getDisplay(){
+        return this.display;
+    }
 
     /**
      * Calling the render function on the Display class and using the game state to draw the graphics properly.

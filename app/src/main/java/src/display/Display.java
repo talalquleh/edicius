@@ -35,6 +35,7 @@ public class Display extends JFrame {
 
 	private Canvas canvas;
 	private Renderer renderer;
+	public static boolean gameOver=false;
 	private DebugRenderer debugRenderer;
 
 	
@@ -115,7 +116,10 @@ public class Display extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
-
+	public void disableFrame()
+	{
+		this.dispose();
+	}
 	/**
 	 * Initializing and implementing the graphics that is going to be used on the game.
 	 * Using the render method from the Renderer class to render those grahics!

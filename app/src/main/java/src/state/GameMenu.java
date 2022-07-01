@@ -11,12 +11,15 @@ import java.awt.event.MouseListener;
 
 public class GameMenu extends JPanel implements MouseListener {
 
-    private Rectangle startGame;
-    private Rectangle exitGame;
+    protected Rectangle startGame;
+    protected Rectangle exitGame;
     private JFrame Frame;
     private Graphics2D g2d;
-    public boolean DeadPlayer=false;
-    public GameMenu() {
+    public boolean isPlayerDead=false;
+    public int killCnt=0;
+    public GameMenu(Boolean isPlayerDead,int killCnt) {
+        this.isPlayerDead = isPlayerDead;
+        this.killCnt=killCnt;
         Frame = new JFrame();
         Frame.setSize(700, 700);
         setPreferredSize(new Dimension(700, 700));
@@ -32,18 +35,23 @@ public class GameMenu extends JPanel implements MouseListener {
     @Override
     public void paint(Graphics g) {
         g2d = (Graphics2D) g;
-        g2d.drawImage(Assets.loadImage("/sprites/btns/gameBackground.png"), 0, 0, 700, 700, this);
+        if(this.isPlayerDead){
+            g2d.drawImage(Assets.loadImage("/sprites/gameOverBG.jpg"), 0, 0, 700, 700, this);
+        }
+        else{
+            g2d.drawImage(Assets.loadImage("/sprites/btns/gameBackground.png"), 0, 0, 700, 700, this);
+        }
         g2d.setPaint(new Color(40, 41, 60));
         g2d.fillRect(startGame.x, startGame.y, startGame.width, startGame.height);
         g2d.fillRect(exitGame.x, exitGame.y, exitGame.width, exitGame.height);
         g2d.setPaint(Color.white);
         g2d.drawString(startGame.text, startGame.getStringX() - 30, startGame.getStringY());
         g2d.drawString(exitGame.text, exitGame.getStringX() - 20, exitGame.getStringY());
-        if(DeadPlayer){
+        if(this.isPlayerDead){
             g2d.setColor(Color.red);
             g2d.setFont(new Font("Monospaced", Font.BOLD, 50));
             FontMetrics metrics3 = g2d.getFontMetrics(g2d.getFont());
-            g2d.drawString("killed: "+GameLoop.killedEnemiesCnt, ( metrics3.stringWidth("killed: "+GameLoop.killedEnemiesCnt)  ), 700 / 6);
+            g2d.drawString("Total Kills: "+this.killCnt, 170, 700 / 6);
         }
 
     }

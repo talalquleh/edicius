@@ -1,4 +1,6 @@
 package src.game;
+import src.state.State;
+import src.state.GameMenu;
 import java.util.Timer;
 import java.util.TimerTask;
 import src.helpers.buttons.PauseButton;
@@ -50,6 +52,14 @@ public class GameLoop implements Runnable{
         public void run()
         {
             if (gl.running) {
+                 if(State.gameOver) {
+                    gl.running=false;
+                    this.cancel();
+                    game.getDisplay().disableFrame();
+                    State.gameOver=false;
+                    new GameMenu(true,State.totalKills);
+                    return;
+                    };
                 currentTime = System.currentTimeMillis();
                 double lastRenderTimeInSeconds = (currentTime - lastUpdate) / 1000d;
                 accumulator += lastRenderTimeInSeconds;

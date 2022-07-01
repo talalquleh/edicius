@@ -1,13 +1,12 @@
 package src.entities;
 
-
 import src.controller.Controller;
 import src.gfx.SpriteSheet;
 import src.helpers.CollisionBox;
 
 public class Player extends MovingEntity {
 
-	private int healthPoints = 300;
+	private int healthPoints = 50;
 	private int killCnt=0;
 	/**
 	 * Takes a Controller and a SpriteSheet that are going to identify all the components of the player!

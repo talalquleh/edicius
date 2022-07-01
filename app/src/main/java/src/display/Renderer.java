@@ -2,6 +2,7 @@ package src.display;
 
 import java.awt.*;
 import java.util.ArrayList;
+import  src.state.GameMenu;
 
 import src.entities.Enemy;
 import src.entities.Entity;
@@ -122,14 +123,18 @@ public class Renderer {
 				}
 			}
 		}
-		// if(Game.COUNT_OF_ENEMIES == 0){
+		// if(state.getPlayer().getKillCnt == 10){
 		// 	Game.game_state = "WIN";
 		// }
-		// if(state.getPlayer().getHealthPoints() == 0){
-		// 	Game.game_state = "LOSE";
-		// }
+		if(state.getPlayer().getHealthPoints() == 0
+		||state.getPlayer().getKillCnt()==10	){
+			State.gameOver=true;
+			State.totalKills=state.getPlayer().getKillCnt();
+			return;
+			// new GameOver(state.getPlayer().getKillCnt());
+		}
 		// if(Game.game_state != "NONE"){
-		// 	// new GameOver(Game.game_state);
+		// 	new GameOver(Game.game_state);
 		// }
 		//in case player dead
 
